@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useDeepCompareEffect, useDeepCompareMemo } from "use-deep-compare";
 
 export default function usePerf({ proskomma, ready }) {
-  const [bookCode, setBookCode] = useState("MAT");
+  const [bookCode, setBookCode] = useState("TIT");
   const [perfHtml, setPerfHtml] = useState();
 
   const epiPerfHtml = useDeepCompareMemo(
     () =>
-      ready && new EpiteletePerfHtml({ proskomma, docSetId: "xyz-fra_lsg" }),
+      ready && new EpiteletePerfHtml({ proskomma, docSetId: "bcs/hi_irv" }),
     [proskomma, ready]
   );
 
@@ -40,11 +40,9 @@ export default function usePerf({ proskomma, ready }) {
     setPerfHtml(newPerfHtml);
   };
 
-  const canUndo = epiPerfHtml?.canUndo();
+  const canUndo = epiPerfHtml?.canUndo && epiPerfHtml?.canUndo(bookCode) || false;
 
-  const canRedo = epiPerfHtml?.canRedo();
-
-  console.log({ canUndo, canRedo });
+  const canRedo = epiPerfHtml?.canRedo && epiPerfHtml?.canRedo(bookCode) || false;
 
   const state = {
     bookCode,

@@ -11,8 +11,6 @@
     "@mui/material": "5.8.0",
     "epitelete-perf-html": "0.1.1",
     "prop-types": "15.8.1",
-    "proskomma-freeze": "0.6.2",
-    "proskomma-frozen-archives": "0.0.3",
     "proskomma-react-hooks": "2.3.2",
     "react": "18.0.0",
     "react-dom": "18.0.0",
