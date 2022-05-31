@@ -3360,11 +3360,6 @@ charcodes@^0.2.0:
   resolved "https://registry.yarnpkg.com/charcodes/-/charcodes-0.2.0.tgz#5208d327e6cc05f99eb80ffc814707572d1f14e4"
   integrity sha512-Y4kiDb+AM4Ecy58YkuZrrSRJBDQdQ2L+NyS1vHHFtNtUjgutcZfx3yp1dAONI/oPaPmyGfCLx5CxL+zauIMyKQ==
 
-charenc@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/charenc/-/charenc-0.0.2.tgz#c0a1d2f3a7092e03774bfa83f14c0fc5790a8667"
-  integrity sha512-yrLQ/yVUFXkzg7EDQsPieE/53+0RlaWTs+wBrvW36cyilJ2SaDWfl4Yj7MtLTXleV9uEKefbAGUPv2/iWSooRA==
-
 check-types@^11.1.1:
   version "11.1.2"
   resolved "https://registry.yarnpkg.com/check-types/-/check-types-11.1.2.tgz#86a7c12bf5539f6324eb0e70ca8896c0e38f3e2f"
@@ -3820,11 +3815,6 @@ cross-spawn@^6.0.0:
     semver "^5.5.0"
     shebang-command "^1.2.0"
     which "^1.2.9"
-
-crypt@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/crypt/-/crypt-0.0.2.tgz#88d7ff7ec0dfb86f713dc87bbb42d044d3e6c41b"
-  integrity sha512-mCxBlsHFYh9C+HVpiEacem8FEBnMXgU9gy4zmNC+SXAZNB/1idgp/aulFJ4FgCi7GPEVbfyng092GqL2k2rmow==
 
 crypto-browserify@^3.11.0:
   version "3.12.0"
@@ -4572,24 +4562,24 @@ entities@^2.0.0:
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.2.0.tgz#098dc90ebb83d8dffa089d55256b351d34c4da55"
   integrity sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
 
-epitelete-perf-html@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/epitelete-perf-html/-/epitelete-perf-html-0.1.1.tgz#a90b006a2356974034937a77adbadbf3bc1549cc"
-  integrity sha512-W7kmKamOVU2Hyp9U6ERrW6LzyRFE/Ty36+AZ7tyjx8MbXXR97AiL/JXxXVNE4LKmFEm/gOJbnYrg4wyHPOf1wQ==
+epitelete-perf-html@0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/epitelete-perf-html/-/epitelete-perf-html-0.1.3.tgz#92a201a61e0dce3635a6573055d3f138e31c530f"
+  integrity sha512-yEe0KPLBwdEDP/epDAH77du4FAA6sWVL99hY7GY3kQ7+qRu4CSh+xEO2sbwHTLpPSmiy3cNyZpizwp634XNUfg==
   dependencies:
     "@babel/core" "^7.17.10"
-    epitelete "^0.1.0"
+    epitelete "^0.1.2"
     node-html-parser "^5.3.3"
 
-epitelete@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/epitelete/-/epitelete-0.1.0.tgz#95c94bdb8a0e7d12cdc61d9df718a188a2d9a5a6"
-  integrity sha512-uHLW2dOz8dyVorhqTbnRlfxlk00DJi4plfPttfPhqGvLY3kvl5zOkOMDj7DhglYx+tcH4JYCK8ErIKJclQESYA==
+epitelete@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/epitelete/-/epitelete-0.1.2.tgz#ea6e1f9a32ad1f4d7b1d79cf997c2f327db51882"
+  integrity sha512-ZKQ1a0Q26OCmNrLFAsWVJNHdBpTAcbLv8F3z9EWz9kHAY12Y+y1Z8Zc0QReA/MqW/91awtOkmZHk+Ba9VcvQlA==
   dependencies:
     "@babel/core" "^7.17.10"
     lodash "4.17.21"
     proskomma-json-validator "^0.0.5"
-    proskomma-render-perf "0.0.5"
+    proskomma-render-perf "0.0.6"
 
 errno@^0.1.3, errno@~0.1.7:
   version "0.1.8"
@@ -6215,7 +6205,7 @@ is-boolean-object@^1.1.0:
     call-bind "^1.0.2"
     has-tostringtag "^1.0.0"
 
-is-buffer@^1.1.5, is-buffer@~1.1.6:
+is-buffer@^1.1.5:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
   integrity sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==
@@ -7476,15 +7466,6 @@ md5.js@^1.3.4:
     hash-base "^3.0.0"
     inherits "^2.0.1"
     safe-buffer "^5.1.2"
-
-md5@^2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/md5/-/md5-2.3.0.tgz#c3da9a6aae3a30b46b7b0c349b87b110dc3bda4f"
-  integrity sha512-T1GITYmFaKuO91vxyoQMFETst+O71VUPEU3ze5GNzDm0OWdP8v1ziTaAEPUr/3kLsY3Sftgz242A1SetQiDL7g==
-  dependencies:
-    charenc "0.0.2"
-    crypt "0.0.2"
-    is-buffer "~1.1.6"
 
 mdn-data@2.0.14:
   version "2.0.14"
@@ -9266,10 +9247,10 @@ proskomma-react-hooks@2.3.2:
     proskomma-render-pdf "0.6.8"
     use-deep-compare "^1.1.0"
 
-proskomma-render-json@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/proskomma-render-json/-/proskomma-render-json-0.0.5.tgz#84bb725b40a16edb94d7a290a2ef59a9b5202bc1"
-  integrity sha512-GvDQ6D57hFz/uuYeLesRlcyt8C1m68fpIjvU+lRz9WWeGN5Gx+aXVhLC9H0481wYKz8hXBVQ0VN1Jzoc8dex3g==
+proskomma-render-json@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/proskomma-render-json/-/proskomma-render-json-0.0.7.tgz#b66ab38ee043b523be29dda52a9afc79176f2fa5"
+  integrity sha512-vcMjn8Rge6MYtlSD5Ew9uEw40Qg7VmM61vA9wTt93+0JkxiM/1subMxM7AUdordtaCNUgf3FTyw9ioZPRAdMOw==
   dependencies:
     "@babel/core" "^7.17.10"
     proskomma-render "^0.6.1"
@@ -9282,15 +9263,15 @@ proskomma-render-pdf@0.6.8:
     app-root-path "^3.0.0"
     proskomma-render "^0.5.4"
 
-proskomma-render-perf@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/proskomma-render-perf/-/proskomma-render-perf-0.0.5.tgz#faf6b13733efb6182847381cfda7447376945406"
-  integrity sha512-TOsPpyxJgRnL8vxrxlL4GUIyZhN3JgUsnpLKPvolZHWPTLfKuGTmkyg0xKFC6GC2gDievmyDEilsYvaDt3NTzA==
+proskomma-render-perf@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/proskomma-render-perf/-/proskomma-render-perf-0.0.6.tgz#f9d27a88f52fb70527f3d69fceba22b1c163c4cc"
+  integrity sha512-AUwap7IL4J7Qwj0iy93eiZHQGlQxDHJMsdDkketAm0dljTxhqJ8hqddgAzYRpxUXoOH7mZvUL16Yoc/V9Z2wcQ==
   dependencies:
     "@babel/core" "^7.17.10"
     ajv "^8.11.0"
     proskomma-render "^0.6.0"
-    proskomma-render-json "0.0.5"
+    proskomma-render-json "0.0.7"
 
 proskomma-render@^0.5.4:
   version "0.5.7"
@@ -10344,12 +10325,11 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-simple-text-editor-rcl@6.8.3:
-  version "6.8.3"
-  resolved "https://registry.yarnpkg.com/simple-text-editor-rcl/-/simple-text-editor-rcl-6.8.3.tgz#fb78c78a57f50b91c4aff85bee40f7d8e006c4e3"
-  integrity sha512-o4WldIs7KGQFgRw+iCFdoGF6kFEhxZDVC2GgGIDRuFO1SvGXLxHWh/3/ZWrUvkjhS7J+N9DhLLP2rQj5bkbiCQ==
+simple-text-editor-rcl@6.13.1:
+  version "6.13.1"
+  resolved "https://registry.yarnpkg.com/simple-text-editor-rcl/-/simple-text-editor-rcl-6.13.1.tgz#2901f01d67c241217f70178648353a376fa35fbe"
+  integrity sha512-gir+F1kuERmAvra0bPMD228oGbocL/ALSMseZ+vfkM7LW08rISKteUL43rUtZcJQ9KbxDI/wMULLQsLVWtY7Hw==
   dependencies:
-    md5 "^2.3.0"
     use-deep-compare "^1.1.0"
 
 sisteransi@^1.0.5:

@@ -1,7 +1,11 @@
 import { Box, Breadcrumbs, Chip } from "@mui/material";
+import { useContext } from "react";
 import { getTypeFromPerf } from "../core/getType";
+import { AppContext } from "../hooks/App.context";
 
-export default function Trail({ state, actions }) {
+export default function Trail() {
+  const { state, actions } = useContext(AppContext);
+
   const { perfHtml, sequenceIds } = state || {};
   const { setSequenceIds } = actions || {};
 
@@ -13,7 +17,7 @@ export default function Trail({ state, actions }) {
     <Chip
       size="small"
       key={index + sequenceId}
-      color={index + 1 === sequenceIds.length ? "default" : "info"}
+      color={index + 1 === sequenceIds?.length ? "default" : "info"}
       label={getTypeFromPerf({ perfHtml, sequenceId })}
       onClick={() => onClickBreadcrumb(index)}
       sx={{ textTransform: "capitalize", color: "white" }}

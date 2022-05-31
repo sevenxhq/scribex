@@ -2,14 +2,13 @@ import EpiteletePerfHtml from "epitelete-perf-html";
 import { useState } from "react";
 import { useDeepCompareEffect, useDeepCompareMemo } from "use-deep-compare";
 
-export default function usePerf({ proskomma, ready }) {
-  const [bookCode, setBookCode] = useState("TIT");
+export default function usePerf({ proskomma, ready, docSetId, bookCode }) {
   const [perfHtml, setPerfHtml] = useState();
 
   const epiPerfHtml = useDeepCompareMemo(
     () =>
-      ready && new EpiteletePerfHtml({ proskomma, docSetId: "bcs/hi_irv" }),
-    [proskomma, ready]
+      ready && new EpiteletePerfHtml({ proskomma, docSetId }),
+    [proskomma, ready, docSetId]
   );
 
   useDeepCompareEffect(() => {
@@ -41,7 +40,6 @@ export default function usePerf({ proskomma, ready }) {
   };
 
   const canUndo = epiPerfHtml?.canUndo && epiPerfHtml?.canUndo(bookCode) || false;
-
   const canRedo = epiPerfHtml?.canRedo && epiPerfHtml?.canRedo(bookCode) || false;
 
   const state = {
@@ -52,7 +50,6 @@ export default function usePerf({ proskomma, ready }) {
   };
 
   const actions = {
-    setBookCode,
     savePerfHtml,
     undo,
     redo

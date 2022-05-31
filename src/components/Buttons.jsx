@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useContext, useMemo } from "react";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import {
   ViewStream,
@@ -10,11 +10,15 @@ import {
   Redo
 } from "@mui/icons-material";
 
-export default function Buttons({
-  state,
-  state: { canUndo, canRedo },
-  actions: { setToggles, undo, redo }
-}) {
+import { AppContext } from "../hooks/App.context";
+
+export default function Buttons() {
+  const {
+    state,
+    state: { canUndo, canRedo },
+    actions: { setToggles, undo, redo }
+  } = useContext(AppContext);
+
   const togglesAll = useMemo(
     () => ["sectionable", "blockable", "editable", "preview"],
     []

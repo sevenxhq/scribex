@@ -1,76 +1,59 @@
-import { useState } from "react";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography
-} from "@mui/material";
+import { useCallback, useContext, useState } from "react";
+import { useDeepCompareCallback, useDeepCompareMemo } from "use-deep-compare";
 import { PerfEditor } from "simple-text-editor-rcl";
 
-import { getTypeFromPerf } from "../core/getType";
+import { AppContext } from "../hooks/App.context";
 import { embedPreviewTextInGrafts } from "../core/nestPerf";
+import Section from "./Section";
+import SectionHeading from "./SectionHeading";
+import SectionBody from "./sectionBody";
+import Block from "./Block";
 
-export default function PerfEditorWrapper({
-  state: { perfHtml, sectionable, blockable, editable, preview },
-  actions: { addSequenceId, savePerfHtml },
-  sequenceId,
-  components: _components
-}) {
-  const sequenceHtml = embedPreviewTextInGrafts({ perfHtml, sequenceId });
+export default function PerfEditorWrapper({ sequenceId }) {
   const [sectionIndices, setSectionIndices] = useState({});
 
-  const sectionIndex = sectionIndices[sequenceId] || 0;
+  const {
+    state: { perfHtml, sectionable, blockable, editable, preview },
+    actions: { addSequenceId, savePerfHtml },
+  } = useContext(AppContext);
 
-  const onContentHandler = (_content) => {
+  console.log("PerfEditorWrapper Render", sequenceId);
+
+  const sequenceHtml = useDeepCompareMemo(() => (
+    embedPreviewTextInGrafts({ perfHtml, sequenceId })
+  ), [perfHtml, sequenceId]);
+
+  const sectionIndex = useDeepCompareMemo(() => (
+    sectionIndices[sequenceId] || 0
+  ), [sectionIndices, sequenceId]);
+
+  const onContentHandler = useDeepCompareCallback((_content) => {
     let _perfHtml = { ...perfHtml };
     _perfHtml.sequencesHtml[sequenceId] = _content;
     savePerfHtml({ sequenceId, perfHtml: _perfHtml });
-  };
+  }, [perfHtml, sequenceId, savePerfHtml]);
 
-  const onSectionClick = ({ content: _content, index }) => {
+  const onSectionClick = useDeepCompareCallback(({ content: _content, index }) => {
     let _sectionIndices = { ...sectionIndices };
     _sectionIndices[sequenceId] = index;
     setSectionIndices(_sectionIndices);
-  };
+  }, [setSectionIndices, sectionIndices]);
 
-  const onBlockClick = ({ content: _content, element }) => {
+  const onBlockClick = useCallback(({ content: _content, element }) => {
     const _sequenceId = element?.dataset?.target;
     if (_sequenceId) {
       addSequenceId(_sequenceId);
     }
-  };
+  }, [addSequenceId]);
 
-  let components = {
-    section: ({ children, show, dir, ...props }) => (
-      <Accordion
-        expanded={show}
-        className={"section " + dir}
-        dir={dir}
-        {...props}
-      >
-        {children}
-      </Accordion>
-    ),
-    sectionHeading: ({ content, show, index, ...props }) => {
-      let type = getTypeFromPerf({ perfHtml, sequenceId });
-      type &&= type === "main" ? "Title & Introduction" : type;
-      return (
-        <AccordionSummary {...props}>
-          <Typography className="sectionHeading" variant="h5">
-            {index ? `Chapter ${index}` : type}
-          </Typography>
-        </AccordionSummary>
-      );
-    },
-    sectionBody: ({ children, ...props }) => (
-      <AccordionDetails className="sectionBody" {...props}>
-        {children}
-      </AccordionDetails>
-    ),
-    ..._components
-  };
+  let components = useDeepCompareMemo(() => ({
+    section: Section,
+    sectionHeading: (props) => SectionHeading({sequenceId, ...props}),
+    sectionBody: SectionBody,
+    block: Block,
+  }), [perfHtml, sequenceId]);
 
-  const props = {
+  const props = useDeepCompareMemo(() => ({
     content: sequenceHtml,
     onContent: onContentHandler,
     components,
@@ -90,12 +73,12 @@ export default function PerfEditorWrapper({
         "<div class='block heading $1'>$2</div>"
       ]
     },
-    sectionIndex
-  };
+    sectionIndex,
+  }), [sequenceHtml, onContentHandler, components, sectionable, blockable, editable, preview, onSectionClick, onBlockClick, sectionIndex]);
 
-  const perfEditorComponent = (sequenceHtml && <PerfEditor {...props} />) || (
-    <></>
-  );
+  const perfEditorComponent = useDeepCompareMemo(() => (
+    sequenceHtml ? <PerfEditor {...props} /> : <></>
+  ), [sequenceHtml, props]);
 
   return <div className="PerfEditorWrapper">{perfEditorComponent}</div>;
 }

@@ -1,17 +1,19 @@
+import ApplicationBar from "./ApplicationBar";
 import Trail from "./Trail";
 import Buttons from "./Buttons";
 import Editor from "./Editor";
-import ApplicationBar from "./ApplicationBar";
 
-export default function Layout({ state, actions }) {
+export default function Layout() {
+  console.log("Layout Render");
+
   return (
     <div className="Layout">
-      <ApplicationBar title={state.title}>
-        <Trail {...{ state, actions }} />
-        <Buttons {...{ state, actions }} />
+      <ApplicationBar>
+        <Trail />
+        <Buttons />
       </ApplicationBar>
       <div id="offset"></div>
-      <Editor {...{ state, actions }} />
+      <Editor />
     </div>
   );
 }

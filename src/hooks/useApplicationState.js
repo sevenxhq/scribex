@@ -1,80 +1,46 @@
-import { useState, useCallback } from "react";
+import { useProskomma, useImport, useCatalog } from "proskomma-react-hooks";
 import { useDeepCompareEffect } from "use-deep-compare";
 
-// import perf from "../data/webbe.luke.perf.html.json";
-// import perf from "../data/jonah.perf.html.json";
+import usePerf from "./usePerf";
+import useApplicationReducer from "./useApplicationReducer";
 
-export default function useApplicationState({
-  perfHtml,
-  savePerfHtml,
-  undo,
-  redo,
-  canUndo,
-  canRedo
-}) {
-  const initialState = {
-    title: "PERF HTML Editor",
-    sequenceIds: [perfHtml?.mainSequenceId],
-    sectionable: true,
-    blockable: true,
-    editable: true,
-    preview: false
-  };
+const verbose = true;
 
-  const [state, setState] = useState(initialState);
+const _documents = [
+  { 
+    selectors: { org: 'unfoldingWord', lang: 'en', abbr: 'psa' },
+    bookCode: 'tit',
+    url: '/unfoldingWord-en_ult.psa.usfm',
+  },
+];
+
+export default function useApplicationState() {
+  const { state, actions } = useApplicationReducer();
+
+  const { proskomma, stateId, newStateId } = useProskomma({ verbose });
+  const { done } = useImport({ proskomma, stateId, newStateId, documents: _documents });
+  console.log({ done });
+
+  const { catalog } = useCatalog({ proskomma, stateId, verbose });
+
+  const { id: docSetId, documents } = done && catalog.docSets[0] || {};
+  const { bookCode } = documents && documents[0] || {};
+  const ready = docSetId && bookCode || false;
+  console.log({ready, catalog});
+
+  const {
+    state: { perfHtml, canUndo, canRedo },
+    actions: { savePerfHtml, undo, redo }
+  } = usePerf({ proskomma, ready, docSetId, bookCode });
 
   useDeepCompareEffect(() => {
     if (perfHtml && perfHtml.mainSequenceId !== state.sequenceIds[0]) {
-      setState((prev) => ({
-        ...prev,
-        sequenceIds: [perfHtml?.mainSequenceId]
-      }));
-    }
+      actions.setSequenceIds([perfHtml?.mainSequenceId]);
+    };
   }, [perfHtml, state.sequenceIds]);
 
-  const setSectionable = useCallback((sectionable) => {
-    setState((prev) => ({ ...prev, sectionable }));
-  }, []);
-
-  const setBlockable = useCallback((blockable) => {
-    setState((prev) => ({ ...prev, blockable }));
-  }, []);
-
-  const setEditable = useCallback((editable) => {
-    setState((prev) => ({ ...prev, editable }));
-  }, []);
-
-  const setPreview = useCallback((preview) => {
-    setState((prev) => ({ ...prev, preview }));
-  }, []);
-
-  const setToggles = useCallback((toggles) => {
-    setState((prev) => ({ ...prev, ...toggles }));
-  }, []);
-
-  const setSequenceIds = useCallback((sequenceIds) => {
-    setState((prev) => ({ ...prev, sequenceIds }));
-  }, []);
-
-  const addSequenceId = useCallback(
-    (_sequenceId) => {
-      setSequenceIds([...state.sequenceIds, _sequenceId]);
-    },
-    [state.sequenceIds, setSequenceIds]
-  );
-
-  const actions = {
-    setSectionable,
-    setBlockable,
-    setEditable,
-    setPreview,
-    setToggles,
-    setSequenceIds,
-    addSequenceId,
-    savePerfHtml,
-    undo,
-    redo
+  return {
+    state: {...state, perfHtml, canUndo, canRedo },
+    actions: {...actions, savePerfHtml, undo, redo },
   };
-
-  return { state: { ...state, perfHtml, canUndo, canRedo }, actions };
-}
+};
