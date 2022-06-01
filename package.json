@@ -9,7 +9,7 @@
     "@emotion/styled": "11.8.1",
     "@mui/icons-material": "5.8.0",
     "@mui/material": "5.8.0",
-    "epitelete-perf-html": "0.1.3",
+    "epitelete-perf-html": "0.1.4",
     "prop-types": "15.8.1",
     "proskomma-react-hooks": "2.3.2",
     "react": "18.0.0",

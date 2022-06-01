@@ -7,7 +7,7 @@ export default function usePerf({ proskomma, ready, docSetId, bookCode }) {
 
   const epiPerfHtml = useDeepCompareMemo(
     () =>
-      ready && new EpiteletePerfHtml({ proskomma, docSetId }),
+      ready && new EpiteletePerfHtml({ proskomma, docSetId, options: { historySize: 100 } }),
     [proskomma, ready, docSetId]
   );
 
