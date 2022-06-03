@@ -8,9 +8,9 @@ const verbose = true;
 
 const _documents = [
   { 
-    selectors: { org: 'unfoldingWord', lang: 'en', abbr: 'psa' },
+    selectors: { org: 'bcs', lang: 'hi', abbr: 'irv' },
     bookCode: 'tit',
-    url: '/unfoldingWord-en_ult.psa.usfm',
+    url: '/bcs-hi_irv.tit.usfm',
   },
 ];
 
@@ -19,14 +19,14 @@ export default function useApplicationState() {
 
   const { proskomma, stateId, newStateId } = useProskomma({ verbose });
   const { done } = useImport({ proskomma, stateId, newStateId, documents: _documents });
-  console.log({ done });
+  if (verbose) console.log({ done });
 
   const { catalog } = useCatalog({ proskomma, stateId, verbose });
 
   const { id: docSetId, documents } = done && catalog.docSets[0] || {};
   const { bookCode } = documents && documents[0] || {};
   const ready = docSetId && bookCode || false;
-  console.log({ready, catalog});
+  if (verbose) console.log({ready, catalog});
 
   const {
     state: { perfHtml, canUndo, canRedo },

@@ -1,15 +1,14 @@
+import { startTransition, useCallback, useState } from "react";
+import { useDeepCompareCallback, useDeepCompareEffect, useDeepCompareMemo } from "use-deep-compare";
+import isEqual from 'lodash.isequal';
 import EpiteletePerfHtml from "epitelete-perf-html";
-import { useState } from "react";
-import { useDeepCompareEffect, useDeepCompareMemo } from "use-deep-compare";
 
 export default function usePerf({ proskomma, ready, docSetId, bookCode }) {
   const [perfHtml, setPerfHtml] = useState();
 
-  const epiPerfHtml = useDeepCompareMemo(
-    () =>
-      ready && new EpiteletePerfHtml({ proskomma, docSetId, options: { historySize: 100 } }),
-    [proskomma, ready, docSetId]
-  );
+  const epiPerfHtml = useDeepCompareMemo(() => (
+    ready && new EpiteletePerfHtml({ proskomma, docSetId, options: { historySize: 100 } })
+  ), [proskomma, ready, docSetId]);
 
   useDeepCompareEffect(() => {
     if (epiPerfHtml) {
@@ -19,15 +18,21 @@ export default function usePerf({ proskomma, ready, docSetId, bookCode }) {
     }
   }, [epiPerfHtml, bookCode]);
 
-  const savePerfHtml = async ({ sequenceId, perfHtml: _perfHtml }) => {
-    const newPerfHtml = await epiPerfHtml?.writeHtml(
-      bookCode,
-      sequenceId,
-      _perfHtml
-    );
-    console.log({ info: "Saved sequenceId", sequenceId });
-    setPerfHtml(newPerfHtml);
-  };
+  const savePerfHtml = useDeepCompareCallback(({ sequenceId, sequenceHtml }) => {
+    let _perfHtml = { ...perfHtml };
+    _perfHtml.sequencesHtml[sequenceId] = sequenceHtml;
+
+    startTransition(() => {
+      if (!isEqual(perfHtml, _perfHtml)) setPerfHtml(_perfHtml);
+    });
+    
+    startTransition(async () => {
+      const newPerfHtml = await epiPerfHtml?.writeHtml( bookCode, sequenceId, _perfHtml );
+      console.log({ info: "Saved sequenceId", bookCode, sequenceId });
+  
+      if (!isEqual(perfHtml, newPerfHtml)) setPerfHtml(newPerfHtml);
+    });
+  }, [perfHtml, bookCode]);
 
   const undo = async () => {
     const newPerfHtml = await epiPerfHtml?.undoHtml(bookCode);

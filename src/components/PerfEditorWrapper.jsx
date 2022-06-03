@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useState, useMemo, useEffect, startTransition } from "react";
 import { useDeepCompareCallback, useDeepCompareMemo } from "use-deep-compare";
 import { PerfEditor } from "simple-text-editor-rcl";
 
@@ -8,30 +8,29 @@ import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import SectionBody from "./sectionBody";
 import Block from "./Block";
+import { getTypeFromSequenceHtml } from "../core/getType";
 
 export default function PerfEditorWrapper({ sequenceId }) {
   const [sectionIndices, setSectionIndices] = useState({});
+
+  useEffect(() => {
+    console.log("PerfEditorWrapper Render", sequenceId);
+  }, []);
 
   const {
     state: { perfHtml, sectionable, blockable, editable, preview },
     actions: { addSequenceId, savePerfHtml },
   } = useContext(AppContext);
 
-  console.log("PerfEditorWrapper Render", sequenceId);
-
   const sequenceHtml = useDeepCompareMemo(() => (
     embedPreviewTextInGrafts({ perfHtml, sequenceId })
   ), [perfHtml, sequenceId]);
 
+  const sequenceType = useMemo(() => getTypeFromSequenceHtml({ sequenceHtml }), [sequenceHtml]);
+
   const sectionIndex = useDeepCompareMemo(() => (
     sectionIndices[sequenceId] || 0
   ), [sectionIndices, sequenceId]);
-
-  const onContentHandler = useDeepCompareCallback((_content) => {
-    let _perfHtml = { ...perfHtml };
-    _perfHtml.sequencesHtml[sequenceId] = _content;
-    savePerfHtml({ sequenceId, perfHtml: _perfHtml });
-  }, [perfHtml, sequenceId, savePerfHtml]);
 
   const onSectionClick = useDeepCompareCallback(({ content: _content, index }) => {
     let _sectionIndices = { ...sectionIndices };
@@ -43,15 +42,19 @@ export default function PerfEditorWrapper({ sequenceId }) {
     const _sequenceId = element?.dataset?.target;
     if (_sequenceId) {
       addSequenceId(_sequenceId);
-    }
+    };
   }, [addSequenceId]);
 
   let components = useDeepCompareMemo(() => ({
     section: Section,
-    sectionHeading: (props) => SectionHeading({sequenceId, ...props}),
+    sectionHeading: (props) => SectionHeading({type: sequenceType, ...props}),
     sectionBody: SectionBody,
     block: Block,
-  }), [perfHtml, sequenceId]);
+  }), [sequenceType]);
+
+  const onContentHandler = useCallback((_content) => {
+    savePerfHtml({ sequenceId, sequenceHtml: _content });
+  }, [sequenceId]);
 
   const props = useDeepCompareMemo(() => ({
     content: sequenceHtml,
@@ -67,18 +70,13 @@ export default function PerfEditorWrapper({ sequenceId }) {
       onSectionClick,
       onBlockClick
     },
-    decorators: {
-      header: [
-        /\\([sr])((\n|.|$)+?)(?=\\[cspvr]|$)/g,
-        "<div class='block heading $1'>$2</div>"
-      ]
-    },
+    decorators: {},
     sectionIndex,
   }), [sequenceHtml, onContentHandler, components, sectionable, blockable, editable, preview, onSectionClick, onBlockClick, sectionIndex]);
 
   const perfEditorComponent = useDeepCompareMemo(() => (
-    sequenceHtml ? <PerfEditor {...props} /> : <></>
-  ), [sequenceHtml, props]);
+    props.content ? <PerfEditor key={sequenceId} {...props} /> : <></>
+  ), [props]);
 
-  return <div className="PerfEditorWrapper">{perfEditorComponent}</div>;
+  return <div className="PerfEditorWrapper" key={sequenceId}>{perfEditorComponent}</div>;
 }

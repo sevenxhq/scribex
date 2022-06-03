@@ -1,8 +1,11 @@
 export const getTypeFromPerf = ({ perfHtml, sequenceId }) => {
-  const html = perfHtml?.sequencesHtml[sequenceId];
-  const div = document.createElement("div");
-  div.innerHTML = html;
-  const type = div.firstChild?.dataset?.sequencetype;
+  const sequenceHtml = perfHtml?.sequencesHtml[sequenceId];
+  return getTypeFromSequenceHtml({ sequenceHtml });
+};
+
+export const getTypeFromSequenceHtml = ({ sequenceHtml }) => {
+  let type = sequenceHtml?.match(/data-sequence[Tt]ype="(\w+)"/);
+  type &&= type[1];
 
   return type;
 };
