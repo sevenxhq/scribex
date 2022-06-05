@@ -3,11 +3,11 @@ import useApplicationState from './useApplicationState';
 
 export const AppContext = React.createContext();
 
-export function AppContextProvider({ children }) {
+export function AppContextProvider({ children, ...props }) {
   const {
     state,
     actions,
-  } = useApplicationState();
+  } = useApplicationState({...props});
 
   const value = {
     state,

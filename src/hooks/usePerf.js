@@ -3,7 +3,7 @@ import { useDeepCompareCallback, useDeepCompareEffect, useDeepCompareMemo } from
 import isEqual from 'lodash.isequal';
 import EpiteletePerfHtml from "epitelete-perf-html";
 
-export default function usePerf({ proskomma, ready, docSetId, bookCode }) {
+export default function usePerf({ proskomma, ready, docSetId, bookCode, verbose }) {
   const [perfHtml, setPerfHtml] = useState();
 
   const epiPerfHtml = useDeepCompareMemo(() => (
@@ -28,7 +28,7 @@ export default function usePerf({ proskomma, ready, docSetId, bookCode }) {
     
     startTransition(async () => {
       const newPerfHtml = await epiPerfHtml?.writeHtml( bookCode, sequenceId, _perfHtml );
-      console.log({ info: "Saved sequenceId", bookCode, sequenceId });
+      if (verbose) console.log({ info: "Saved sequenceId", bookCode, sequenceId });
   
       if (!isEqual(perfHtml, newPerfHtml)) setPerfHtml(newPerfHtml);
     });

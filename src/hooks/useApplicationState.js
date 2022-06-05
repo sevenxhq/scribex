@@ -4,18 +4,22 @@ import { useDeepCompareEffect } from "use-deep-compare";
 import usePerf from "./usePerf";
 import useApplicationReducer from "./useApplicationReducer";
 
-const verbose = true;
-
 const _documents = [
+  // { 
+  //   selectors: { org: 'bcs', lang: 'hi', abbr: 'irv' },
+  //   bookCode: 'tit',
+  //   url: '/bcs-hi_irv.tit.usfm',
+  // },
   { 
-    selectors: { org: 'bcs', lang: 'hi', abbr: 'irv' },
-    bookCode: 'tit',
-    url: '/bcs-hi_irv.tit.usfm',
+    selectors: { org: 'unfoldingWord', lang: 'en', abbr: 'ult' },
+    bookCode: 'psa',
+    url: '/unfoldingWord-en_ult.psa.usfm',
   },
 ];
 
-export default function useApplicationState() {
-  const { state, actions } = useApplicationReducer();
+export default function useApplicationState(props) {
+  const { state, actions } = useApplicationReducer(props);
+  const { verbose } = state;
 
   const { proskomma, stateId, newStateId } = useProskomma({ verbose });
   const { done } = useImport({ proskomma, stateId, newStateId, documents: _documents });
@@ -31,7 +35,7 @@ export default function useApplicationState() {
   const {
     state: { perfHtml, canUndo, canRedo },
     actions: { savePerfHtml, undo, redo }
-  } = usePerf({ proskomma, ready, docSetId, bookCode });
+  } = usePerf({ proskomma, ready, docSetId, bookCode, verbose });
 
   useDeepCompareEffect(() => {
     if (perfHtml && perfHtml.mainSequenceId !== state.sequenceIds[0]) {

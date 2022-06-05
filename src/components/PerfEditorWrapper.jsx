@@ -13,14 +13,12 @@ import { getTypeFromSequenceHtml } from "../core/getType";
 export default function PerfEditorWrapper({ sequenceId }) {
   const [sectionIndices, setSectionIndices] = useState({});
 
-  useEffect(() => {
-    console.log("PerfEditorWrapper Render", sequenceId);
-  }, []);
-
   const {
-    state: { perfHtml, sectionable, blockable, editable, preview },
+    state: { perfHtml, sectionable, blockable, editable, preview, verbose },
     actions: { addSequenceId, savePerfHtml },
   } = useContext(AppContext);
+
+  useEffect(() => { if (verbose) console.log("PerfEditorWrapper First Render", sequenceId); }, []);
 
   const sequenceHtml = useDeepCompareMemo(() => (
     embedPreviewTextInGrafts({ perfHtml, sequenceId })
@@ -45,21 +43,26 @@ export default function PerfEditorWrapper({ sequenceId }) {
     };
   }, [addSequenceId]);
 
-  let components = useDeepCompareMemo(() => ({
-    section: Section,
-    sectionHeading: (props) => SectionHeading({type: sequenceType, ...props}),
-    sectionBody: SectionBody,
-    block: Block,
-  }), [sequenceType]);
-
   const onContentHandler = useCallback((_content) => {
-    savePerfHtml({ sequenceId, sequenceHtml: _content });
+    if (sequenceHtml !== _content) {
+      savePerfHtml({ sequenceId, sequenceHtml: _content });
+    };
   }, [sequenceId]);
 
-  const props = useDeepCompareMemo(() => ({
+  const handleClick = (event) => {
+    event.target.focus();
+    console.log('Click happened, and attempt to focus on:', event.target);
+  };
+
+  const props = {
     content: sequenceHtml,
     onContent: onContentHandler,
-    components,
+    components: {
+      section: Section,
+      sectionHeading: (props) => SectionHeading({type: sequenceType, ...props}),
+      sectionBody: SectionBody,
+      block: Block,
+    },
     options: {
       sectionable,
       blockable,
@@ -72,11 +75,12 @@ export default function PerfEditorWrapper({ sequenceId }) {
     },
     decorators: {},
     sectionIndex,
-  }), [sequenceHtml, onContentHandler, components, sectionable, blockable, editable, preview, onSectionClick, onBlockClick, sectionIndex]);
+    verbose,
+  };
 
-  const perfEditorComponent = useDeepCompareMemo(() => (
-    props.content ? <PerfEditor key={sequenceId} {...props} /> : <></>
-  ), [props]);
-
-  return <div className="PerfEditorWrapper" key={sequenceId}>{perfEditorComponent}</div>;
-}
+  return (
+    <div className="PerfEditorWrapper" key={sequenceId}>
+      <PerfEditor key={sequenceId} {...props} />
+    </div>
+  );
+};

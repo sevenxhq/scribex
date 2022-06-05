@@ -6,15 +6,14 @@ import { AppContextProvider } from "./hooks/App.context";
 import "./styles.css";
   
 export default function App() {
-  useEffect(() => {
-    console.log("App load");
-  }, []);
+  const verbose = true;
+  useEffect(() => { if (verbose) console.log("App First Render"); }, []);
 
-  console.log("App Render");
+  if (verbose) console.log("App Render");
 
   return (
     <div className="App">
-      <AppContextProvider>
+      <AppContextProvider verbose={verbose}>
         <Layout />
       </AppContextProvider>
     </div>

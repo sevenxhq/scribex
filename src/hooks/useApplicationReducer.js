@@ -1,13 +1,15 @@
 import { useState, useCallback } from "react";
 
-export default function useStateReducer() {
+export default function useStateReducer({...props}) {
   const initialState = {
     title: "PERF HTML Editor",
     sequenceIds: [],
     sectionable: true,
     blockable: true,
     editable: true,
-    preview: false
+    preview: false,
+    verbose: false,
+    ...props
   };
 
   const [state, setState] = useState(initialState);
