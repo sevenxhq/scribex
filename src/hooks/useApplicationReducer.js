@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 
 export default function useStateReducer({...props}) {
   const initialState = {
-    title: "PERF HTML Editor",
+    title: "STEP Editor",
     sequenceIds: [],
     sectionable: true,
     blockable: true,
