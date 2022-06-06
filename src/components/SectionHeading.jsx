@@ -1,8 +1,11 @@
 import React from 'react';
 import { useDeepCompareMemo } from 'use-deep-compare';
 import { AccordionSummary, Typography } from '@mui/material';
+import useLifecycleLog from '../hooks/useLifecycleLog';
 
 export default function SectionHeading({ type: _type, content, show, index, ...props }) {
+  useLifecycleLog(SectionHeading, index);
+
   let type = index && `Chapter ${index}`;
   type ||= (_type === "main") ? "Title & Introduction" : _type;
 

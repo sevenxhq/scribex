@@ -11,8 +11,11 @@ import {
 } from "@mui/icons-material";
 
 import { AppContext } from "../hooks/App.context";
+import useLifecycleLog from "../hooks/useLifecycleLog";
 
 export default function Buttons() {
+  useLifecycleLog(Buttons);
+
   const {
     state,
     state: { canUndo, canRedo },

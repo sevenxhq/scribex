@@ -4,11 +4,12 @@ import { AppContext } from '../hooks/App.context';
 import { getTarget } from '../core/getTarget';
 
 import PerfEditorWrapper from './PerfEditorWrapper';
+import useLifecycleLog from '../hooks/useLifecycleLog';
 
 export default function Block({ content, style, index, verbose, ...props }) {
   const { state: { preview } } = useContext(AppContext);
   
-  useEffect(() => { if (verbose) console.log("Block First Render", index); }, []);
+  useLifecycleLog(Block, index);
 
   let component;
   let editable = !!content.match(/class="[\w\s]*block[\w\s]*"/);

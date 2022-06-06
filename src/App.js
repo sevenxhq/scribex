@@ -7,9 +7,13 @@ import "./styles.css";
   
 export default function App() {
   const verbose = false;
-  useEffect(() => { if (verbose) console.log("App First Render"); }, []);
+  useEffect(() => {
+    if (verbose) console.log("App: Mount/First Render");
+    return (() => {
+      if (verbose) console.log("App: Unmount/Destroy");
+    });
+  }, []);
 
-  if (verbose) console.log("App Render");
 
   return (
     <div className="App">

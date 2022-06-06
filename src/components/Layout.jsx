@@ -1,15 +1,11 @@
-import { useContext } from "react";
-
-import { AppContext } from "../hooks/App.context";
-
 import ApplicationBar from "./ApplicationBar";
 import Trail from "./Trail";
 import Buttons from "./Buttons";
 import Editor from "./Editor";
+import useLifecycleLog from "../hooks/useLifecycleLog";
 
 export default function Layout() {
-  const { verbose } = useContext(AppContext);
-  if (verbose) console.log("Layout Render");
+  useLifecycleLog(Layout);
 
   return (
     <div className="Layout">

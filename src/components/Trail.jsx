@@ -2,8 +2,11 @@ import { Box, Breadcrumbs, Chip } from "@mui/material";
 import { useContext } from "react";
 import { getTypeFromPerf } from "../core/getType";
 import { AppContext } from "../hooks/App.context";
+import useLifecycleLog from "../hooks/useLifecycleLog";
 
 export default function Trail() {
+  useLifecycleLog(Trail);
+
   const { state, actions } = useContext(AppContext);
 
   const { perfHtml, sequenceIds } = state || {};

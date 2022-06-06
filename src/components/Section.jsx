@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { Accordion } from '@mui/material';
+import useLifecycleLog from '../hooks/useLifecycleLog';
 
 export default function Section({ children, index, show, dir, verbose, ...props }) {
-  useEffect(() => { if (verbose) console.log("Section First Render", index); }, []);
+  useLifecycleLog(Section, index);
 
   return (
     <Accordion

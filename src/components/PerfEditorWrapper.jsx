@@ -2,23 +2,24 @@ import { useCallback, useContext, useState, useMemo, useEffect, startTransition 
 import { useDeepCompareCallback, useDeepCompareMemo } from "use-deep-compare";
 import { PerfEditor } from "simple-text-editor-rcl";
 
+import useLifecycleLog from "../hooks/useLifecycleLog";
 import { AppContext } from "../hooks/App.context";
 import { embedPreviewTextInGrafts } from "../core/nestPerf";
+import { getTypeFromSequenceHtml } from "../core/getType";
 import Section from "./Section";
 import SectionHeading from "./SectionHeading";
 import SectionBody from "./sectionBody";
 import Block from "./Block";
-import { getTypeFromSequenceHtml } from "../core/getType";
 
 export default function PerfEditorWrapper({ sequenceId }) {
   const [sectionIndices, setSectionIndices] = useState({});
+
+  useLifecycleLog(PerfEditorWrapper, sequenceId);
 
   const {
     state: { perfHtml, sectionable, blockable, editable, preview, verbose },
     actions: { addSequenceId, savePerfHtml },
   } = useContext(AppContext);
-
-  useEffect(() => { if (verbose) console.log("PerfEditorWrapper First Render", sequenceId); }, []);
 
   const sequenceHtml = useDeepCompareMemo(() => (
     embedPreviewTextInGrafts({ perfHtml, sequenceId })
