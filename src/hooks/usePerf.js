@@ -1,9 +1,10 @@
-import { startTransition, useState } from "react";
+import { useState, useTransition } from "react";
 import { useDeepCompareCallback, useDeepCompareEffect, useDeepCompareMemo } from "use-deep-compare";
 import isEqual from 'lodash.isequal';
 import EpiteletePerfHtml from "epitelete-perf-html";
 
 export default function usePerf({ proskomma, ready, docSetId, bookCode, verbose }) {
+  const [isSaving, startSaving] = useTransition();
   const [perfHtml, setPerfHtml] = useState();
 
   const epiPerfHtml = useDeepCompareMemo(() => (
@@ -22,11 +23,9 @@ export default function usePerf({ proskomma, ready, docSetId, bookCode, verbose 
     let _perfHtml = { ...perfHtml };
     _perfHtml.sequencesHtml[sequenceId] = sequenceHtml;
 
-    startTransition(() => {
-      if (!isEqual(perfHtml, _perfHtml)) setPerfHtml(_perfHtml);
-    });
+    if (!isEqual(perfHtml, _perfHtml)) setPerfHtml(_perfHtml);
     
-    startTransition(async () => {
+    startSaving(async () => {
       const newPerfHtml = await epiPerfHtml?.writeHtml( bookCode, sequenceId, _perfHtml );
       if (verbose) console.log({ info: "Saved sequenceId", bookCode, sequenceId });
   
@@ -51,7 +50,8 @@ export default function usePerf({ proskomma, ready, docSetId, bookCode, verbose 
     bookCode,
     perfHtml,
     canUndo,
-    canRedo
+    canRedo,
+    isSaving,
   };
 
   const actions = {

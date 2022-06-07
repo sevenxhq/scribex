@@ -23,19 +23,18 @@ export default function useApplicationState(props) {
 
   const { proskomma, stateId, newStateId } = useProskomma({ verbose });
   const { done } = useImport({ proskomma, stateId, newStateId, documents: _documents });
-  if (verbose) console.log({ done });
 
   const { catalog } = useCatalog({ proskomma, stateId, verbose });
 
   const { id: docSetId, documents } = done && catalog.docSets[0] || {};
   const { bookCode } = documents && documents[0] || {};
   const ready = docSetId && bookCode || false;
-  if (verbose) console.log({ready, catalog});
+  const isLoading = !done || !ready;
 
-  const {
-    state: { perfHtml, canUndo, canRedo },
-    actions: { savePerfHtml, undo, redo }
-  } = usePerf({ proskomma, ready, docSetId, bookCode, verbose });
+  const { state: perfState, actions: perfActions } = usePerf({
+    proskomma, ready, docSetId, bookCode, verbose
+  });
+  const { perfHtml } = perfState;
 
   useDeepCompareEffect(() => {
     if (perfHtml && perfHtml.mainSequenceId !== state.sequenceIds[0]) {
@@ -44,7 +43,7 @@ export default function useApplicationState(props) {
   }, [perfHtml, state.sequenceIds]);
 
   return {
-    state: {...state, perfHtml, canUndo, canRedo },
-    actions: {...actions, savePerfHtml, undo, redo },
+    state: {...state, ...perfState, isLoading },
+    actions: {...actions, ...perfActions },
   };
 };
