@@ -9,7 +9,7 @@
     "@emotion/styled": "11.8.1",
     "@mui/icons-material": "5.8.0",
     "@mui/material": "5.8.0",
-    "epitelete-perf-html": "0.1.9",
+    "epitelete-perf-html": "https://github.com/sevenxtech/perf-html-converter.git",
     "lodash.isequal": "^4.5.0",
     "prop-types": "15.8.1",
     "proskomma-react-hooks": "2.3.2",
