@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Skeleton, Stack } from "@mui/material";
+// import { Skeleton, Stack } from "@mui/material";
 
 import { AppContext } from "../hooks/App.context";
 import useLifecycleLog from "../hooks/useLifecycleLog";
@@ -13,18 +13,19 @@ export default function Editor() {
   useLifecycleLog(Editor);
   const style = (isSaving || isLoading || !sequenceId) ? { cursor: 'progress' } : {};
 
-  const skeleton = (
-    <Stack spacing={1}>
-      <Skeleton key='1' variant="text" height="8em" sx={{ bgcolor: 'white' }} />
-      <Skeleton key='2' variant="rectangular" height="16em" sx={{ bgcolor: 'white' }} />
-      <Skeleton key='3' variant="text" height="8em" sx={{ bgcolor: 'white' }} />
-      <Skeleton key='2' variant="rectangular" height="16em" sx={{ bgcolor: 'white' }} />
-    </Stack>
-  )
+  // const skeleton = (
+  //   <Stack spacing={1}>
+  //     <Skeleton key='1' variant="text" height="8em" sx={{ bgcolor: 'white' }} />
+  //     <Skeleton key='2' variant="rectangular" height="16em" sx={{ bgcolor: 'white' }} />
+  //     <Skeleton key='3' variant="text" height="8em" sx={{ bgcolor: 'white' }} />
+  //     <Skeleton key='2' variant="rectangular" height="16em" sx={{ bgcolor: 'white' }} />
+  //   </Stack>
+  // )
 
   return (
     <div className="Editor" style={style}>
-      {sequenceId ? <PerfEditorWrapper sequenceId={sequenceId} /> : skeleton}
+      {!sequenceId && <p>loading</p> }
+      {sequenceId && <PerfEditorWrapper sequenceId={sequenceId} /> }
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDeepCompareMemo } from 'use-deep-compare';
-import { AccordionSummary, Typography } from '@mui/material';
 import useLifecycleLog from '../hooks/useLifecycleLog';
 
 export default function SectionHeading({ type: _type, content, show, index, ...props }) {
@@ -10,11 +9,11 @@ export default function SectionHeading({ type: _type, content, show, index, ...p
   type ||= (_type === "main") ? "Title & Introduction" : _type;
 
   const component = useDeepCompareMemo(() => (
-    <AccordionSummary {...props}>
-      <Typography className="sectionHeading" variant="h5">
-        {type}
-      </Typography>
-    </AccordionSummary>
+    <div {...props}>
+    <div className="sectionHeading TESTSECTIONHEADING" variant="h5">
+      {[type , index]}
+    </div>
+  </div>
   ), [props, type]);
 
   return component;

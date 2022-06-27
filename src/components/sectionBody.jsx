@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDeepCompareMemo } from 'use-deep-compare';
-import { AccordionDetails } from '@mui/material';
 import useLifecycleLog from '../hooks/useLifecycleLog';
 
 export default function SectionBody({ children, show, ...props }) {
@@ -10,9 +9,9 @@ export default function SectionBody({ children, show, ...props }) {
     let _component = <></>;
     if (show) {
       _component = (
-        <AccordionDetails className="sectionBody" {...props}>
-          {children}
-        </AccordionDetails>
+        <div className="sectionBody TESTSECTIONBODY" {...props}>
+        {children}
+      </div>
       );
     };
     return _component;
