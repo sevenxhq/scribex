@@ -1,4 +1,29 @@
-html {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#content {
+  @apply rounded-sm overflow-hidden;
+}
+/* .section {
+  @apply border-2 border-black text-sm rounded-sm overflow-hidden;
+} */
+
+.editor {
+  @apply m-10 p-5 border-2 border-black text-sm rounded-sm overflow-hidden;
+}
+.chapter-number {
+  @apply text-3xl font-bold mr-2 mt-10 break-before-column before:block;
+}
+
+.verse-number {
+  @apply text-xs mr-1 text-sky-500 align-super;
+}
+
+.major-title, .major-secondary-heading {
+  @apply text-sky-500;
+}
+/* html {
   background-color: lightgray;
 }
 
@@ -144,4 +169,4 @@ html {
 
 .perf .PerfEditorWrapper {
   margin: 0.1em;
-}
+} */

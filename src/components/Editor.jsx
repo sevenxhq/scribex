@@ -23,7 +23,7 @@ export default function Editor() {
   // )
 
   return (
-    <div className="Editor" style={style}>
+    <div className="editor" style={style}>
       {!sequenceId && <p>loading</p> }
       {sequenceId && <PerfEditorWrapper sequenceId={sequenceId} /> }
     </div>

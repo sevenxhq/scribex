@@ -9,7 +9,7 @@ export default function SectionBody({ children, show, ...props }) {
     let _component = <></>;
     if (show) {
       _component = (
-        <div className="sectionBody" {...props}>
+        <div className="section-body" {...props}>
         {children}
       </div>
       );

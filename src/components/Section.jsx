@@ -6,13 +6,13 @@ export default function Section({ children, index, show, dir, verbose, ...props 
 
   return (
     <div
-    // TransitionProps={{ unmountOnExit: true }}
-    // expanded={show}
-    className={"section" + dir}
-    dir={dir}
-    {...props}
-  >
-    {children}
-  </div>
+      // TransitionProps={{ unmountOnExit: true }}
+      // expanded={show}
+      className={"section" + dir}
+      dir={dir}
+      {...props}
+    >
+      {children}
+    </div>
   );
 };

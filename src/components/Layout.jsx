@@ -6,7 +6,7 @@ export default function Layout() {
   useLifecycleLog(Layout);
 
   return (
-    <div className="Layout">
+    <div className="layout">
       <ApplicationBar />
       <div id="offset"></div>
       <Editor />

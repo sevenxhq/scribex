@@ -80,7 +80,7 @@ export default function PerfEditorWrapper({ sequenceId }) {
   };
 
   return (
-    <div className="PerfEditorWrapper" key={sequenceId}>
+    <div className="perf-editor-wrapper" key={sequenceId}>
       <PerfEditor key={sequenceId} {...props} />
     </div>
   );
