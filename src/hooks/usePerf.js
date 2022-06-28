@@ -1,14 +1,14 @@
 import { useState, useTransition } from "react";
 import { useDeepCompareCallback, useDeepCompareEffect, useDeepCompareMemo } from "use-deep-compare";
 import isEqual from 'lodash.isequal';
-import EpiteletePerfHtml from "epitelete-perf-html";
+import PerfXHtml from "perfxhtml";
 
 export default function usePerf({ proskomma, ready, docSetId, bookCode, verbose }) {
   const [isSaving, startSaving] = useTransition();
   const [perfHtml, setPerfHtml] = useState();
 
   const epiPerfHtml = useDeepCompareMemo(() => (
-    ready && new EpiteletePerfHtml({ proskomma, docSetId, options: { historySize: 100 } })
+    ready && new PerfXHtml({ proskomma, docSetId, options: { historySize: 100 } })
   ), [proskomma, ready, docSetId]);
 
   useDeepCompareEffect(() => {
