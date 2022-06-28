@@ -8,7 +8,7 @@ export default function Section({ children, index, show, dir, verbose, ...props 
     <div
     // TransitionProps={{ unmountOnExit: true }}
     // expanded={show}
-    className={"section TESTSECTION" + dir}
+    className={"section" + dir}
     dir={dir}
     {...props}
   >
