@@ -1,7 +1,7 @@
 import { useState, useTransition } from "react";
 import { useDeepCompareCallback, useDeepCompareEffect, useDeepCompareMemo } from "use-deep-compare";
 import isEqual from 'lodash.isequal';
-import EpiteletePerfHtml from "epitelete-perf-html";
+import EpiteletePerfHtml from "perfxhtml";
 
 export default function usePerf({ proskomma, ready, docSetId, bookCode, verbose }) {
   const [isSaving, startSaving] = useTransition();
