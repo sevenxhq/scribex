@@ -10,7 +10,7 @@ export default function SectionHeading({ type: _type, content, show, index, ...p
 
   const component = useDeepCompareMemo(() => (
     <div {...props}>
-    <div className="sectionHeading TESTSECTIONHEADING" variant="h5">
+    <div className="sectionHeading" variant="h5">
       {[type , index]}
     </div>
   </div>
