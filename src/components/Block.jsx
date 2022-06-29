@@ -11,10 +11,9 @@ export default function Block({ content, style, index, verbose, ...props }) {
   const { state: { preview } } = useContext(AppContext);
   
   useLifecycleLog(Block, index);
-
   let component;
-  let editable = !!content.match(/class="[\w\s]*block[\w\s]*"/);
-
+  // let editable = !!content.match(/class="[\w\s]*block[\w\s]*"/);
+  let editable = !!content.match(/class="[\w\s]*block[\w\s]/);
   if (editable) component = (
     // <ContextMenu>
       <div {...props} />
