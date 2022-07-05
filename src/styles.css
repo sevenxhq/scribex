@@ -20,9 +20,19 @@
   @apply text-xs mr-1 text-sky-500 align-super;
 }
 
-.major-title, .major-secondary-heading {
+.major-title,
+.major-secondary-heading {
   @apply text-sky-500;
 }
+
+.graft {
+  @apply text-sky-500 text-lg;
+}
+
+.perf .graft:before {
+  content: " " attr(data-previewText);
+}
+
 /* html {
   background-color: lightgray;
 }
