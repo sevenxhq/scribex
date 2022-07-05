@@ -33,8 +33,8 @@ export default function useApplicationState(props) {
   const isLoading = !done || !ready;
 
   const { state: perfState, actions: perfActions } = usePerf({
-    // proskomma, ready, docSetId, bookCode, verbose , htmlCssMapper  //uncomment if pasing custom classes. 
-    proskomma, ready, docSetId, bookCode, verbose
+    proskomma, ready, docSetId, bookCode, verbose , htmlCssMapper  //uncomment if passing custom classes. 
+    // proskomma, ready, docSetId, bookCode, verbose
   });
   const { perfHtml } = perfState;
 
