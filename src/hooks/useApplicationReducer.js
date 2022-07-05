@@ -4,7 +4,7 @@ export default function useStateReducer({ ...props }) {
   const initialState = {
     // title: "STEP Editor",
     sequenceIds: [],
-    sectionable: true,
+    sectionable: false,
     blockable: true,
     editable: true,
     preview: false,

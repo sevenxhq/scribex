@@ -19,7 +19,7 @@ export const classNames = (...classes) => classes.filter(Boolean).join(" ");
 export default function Buttons() {
   useLifecycleLog(Buttons);
 
-  const [sectionable, setSectionableState] = useState(true);
+  const [sectionable, setSectionableState] = useState(false);
   const [blockable, setBlockableState] = useState(true);
   const [editable, setEditableState] = useState(true);
   const [preview, setPreviewState] = useState(false);
