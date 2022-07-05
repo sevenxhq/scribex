@@ -4,6 +4,16 @@ import React, { useCallback, useContext, useMemo } from "react";
 import { AppContext } from "../hooks/App.context";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 
+import {
+  LockClosedIcon,
+  BookmarkIcon,
+  CollectionIcon,
+  ViewBoardsIcon,
+  PencilIcon,
+} from "@heroicons/react/outline";
+
+import { ArrowClockwise, ArrowCounterClockwise } from "phosphor-react";
+
 export default function Buttons() {
   useLifecycleLog(Buttons);
 
@@ -20,17 +30,57 @@ export default function Buttons() {
     },
   } = useContext(AppContext);
 
-
   return (
-    <div>
-      <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={()=>setSectionable(true)}>Sectionable On</button>
-      <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"onClick={()=>setSectionable(false)}>Sectionable Off</button>
-      <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"onClick={()=>setEditable(true)}>Editable On</button>
-      <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"onClick={()=>setEditable(false)}>Editable Off</button>
-      <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"onClick={()=>setBlockable(true)}>Blockable On</button>
-      <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"onClick={()=>setBlockable(false)}>Blockable Off</button>
-      <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"onClick={()=>undo()}>Undo</button>
-      <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"onClick={()=>redo()}>Redo</button>
-    </div>
+    <>
+      <CollectionIcon
+        aria-label="Collection-Icon"
+        className="h-5 w-5 text-white fill-current cursor-pointer"
+        aria-hidden="true"
+        onClick={() => setSectionable(true)}
+      />
+      <CollectionIcon
+        aria-label="Collection-Icon"
+        className="h-5 w-5 text-white cursor-pointer"
+        aria-hidden="true"
+        onClick={() => setSectionable(false)}
+      />
+
+      <PencilIcon
+        aria-label="Collection-Icon"
+        className="h-5 w-5 text-white fill-current cursor-pointer"
+        aria-hidden="true"
+        onClick={() => setEditable(true)}
+      />
+      <PencilIcon
+        aria-label="Collection-Icon"
+        className="h-5 w-5 text-white cursor-pointer"
+        aria-hidden="true"
+        onClick={() => setEditable(false)}
+      />
+      <button
+        className="text-blue-700 font-semibold text-primary hover:text-white border border-blue-500 hover:border-transparent rounded"
+        onClick={() => setBlockable(true)}
+      >
+        B On
+      </button>
+      <button
+        className="text-blue-700 font-semibold text-primary hover:text-white border border-blue-500 hover:border-transparent rounded"
+        onClick={() => setBlockable(false)}
+      >
+        B Off
+      </button>
+      <ArrowCounterClockwise
+        aria-label="Collection-Icon"
+        className="h-5 w-5 text-white cursor-pointer"
+        aria-hidden="true"
+        onClick={() => undo()}
+      />
+      <ArrowClockwise
+        aria-label="Collection-Icon"
+        className="h-5 w-5 text-white cursor-pointer"
+        aria-hidden="true"
+        onClick={() => redo()}
+      />
+    </>
   );
 }

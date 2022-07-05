@@ -9,10 +9,5 @@ export default function ApplicationBar({ children }) {
   } = useContext(AppContext);
   useLifecycleLog(ApplicationBar);
 
-  return (
-    <div>
-      <div>{title}</div>
-      <div>{children}</div>
-    </div>
-  );
+  return <>{children}</>;
 }
