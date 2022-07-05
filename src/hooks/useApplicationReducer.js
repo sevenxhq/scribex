@@ -1,15 +1,15 @@
 import { useState, useCallback } from "react";
 
-export default function useStateReducer({...props}) {
+export default function useStateReducer({ ...props }) {
   const initialState = {
-    title: "STEP Editor",
+    // title: "STEP Editor",
     sequenceIds: [],
     sectionable: true,
     blockable: true,
     editable: true,
     preview: false,
     verbose: false,
-    ...props
+    ...props,
   };
 
   const [state, setState] = useState(initialState);
@@ -56,4 +56,4 @@ export default function useStateReducer({...props}) {
   };
 
   return { state, actions };
-};
+}

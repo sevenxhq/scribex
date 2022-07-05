@@ -16,11 +16,9 @@ export default function SectionHeading({
 
   const component = useDeepCompareMemo(
     () => (
-      <div {...props}>
-        <div className="section-heading" variant="h5">
-          {type}
-        </div>
-      </div>
+      <h2 {...props} className="section-heading" variant="h5">
+        {type}
+      </h2>
     ),
     [props, type]
   );

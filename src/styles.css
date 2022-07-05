@@ -9,28 +9,33 @@
   @apply border-2 border-black text-sm rounded-sm overflow-hidden;
 } */
 
-.editor {
-  @apply m-10 p-5 border-2 border-black text-sm rounded-sm overflow-hidden;
+.section > .section-heading {
+  @apply hidden;
 }
+.editor {
+  @apply m-2 mx-3;
+}
+
 .chapter-number {
-  @apply text-3xl font-bold mr-2 mt-10 break-before-column before:block;
+  @apply text-xl font-bold mr-2 mt-10 break-before-column before:block;
 }
 
 .verse-number {
-  @apply text-xs mr-1 text-sky-500 align-super;
+  @apply text-xxs mr-1 text-primary align-super;
 }
 
 .major-title,
 .major-secondary-heading {
-  @apply text-sky-500;
+  @apply text-primary;
 }
 
 .graft {
-  @apply text-sky-500 text-lg;
+  @apply text-primary text-sm align-super;
 }
 
 .perf .graft:before {
-  content: " " attr(data-previewText);
+  @apply cursor-pointer font-semibold;
+  content: " ‡";
 }
 
 /* html {
