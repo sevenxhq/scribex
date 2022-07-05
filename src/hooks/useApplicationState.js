@@ -3,6 +3,7 @@ import { useDeepCompareEffect } from "use-deep-compare";
 
 import usePerf from "./usePerf";
 import useApplicationReducer from "./useApplicationReducer";
+import htmlCssMapper from "../data/htmlcssmap.json"
 
 const _documents = [
   // { 
@@ -32,6 +33,7 @@ export default function useApplicationState(props) {
   const isLoading = !done || !ready;
 
   const { state: perfState, actions: perfActions } = usePerf({
+    // proskomma, ready, docSetId, bookCode, verbose , htmlCssMapper  //uncomment if pasing custom classes. 
     proskomma, ready, docSetId, bookCode, verbose
   });
   const { perfHtml } = perfState;

@@ -3,17 +3,17 @@ import { useDeepCompareCallback, useDeepCompareEffect, useDeepCompareMemo } from
 import isEqual from 'lodash.isequal';
 import PerfXHtml from "perfxhtml";
 
-export default function usePerf({ proskomma, ready, docSetId, bookCode, verbose }) {
+
+export default function usePerf({ proskomma, ready, docSetId, bookCode, verbose, htmlCssMapper }) {
   const [isSaving, startSaving] = useTransition();
   const [perfHtml, setPerfHtml] = useState();
-
   const epiPerfHtml = useDeepCompareMemo(() => (
-    ready && new PerfXHtml({ proskomma, docSetId, options: { historySize: 100 } })
+    ready && new PerfXHtml({ proskomma, docSetId, options: { historySize: 100 }})
   ), [proskomma, ready, docSetId]);
 
   useDeepCompareEffect(() => {
     if (epiPerfHtml) {
-      epiPerfHtml.readHtml(bookCode).then((_perfHtml) => {
+      epiPerfHtml.readHtml(bookCode,htmlCssMapper).then((_perfHtml) => {  //remove htmlCssMapper for default classes
         setPerfHtml(_perfHtml);
       });
     }
