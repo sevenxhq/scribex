@@ -9,9 +9,10 @@
   @apply border-2 border-black text-sm rounded-sm overflow-hidden;
 } */
 
-.section > .section-heading {
+/* .section > .section-heading {
   @apply hidden;
-}
+} */
+
 .editor {
   @apply my-2;
 }

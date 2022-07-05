@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useCallback, useContext, useMemo } from "react";
+import React, { useCallback, useContext, useMemo, useState } from "react";
 
 import { AppContext } from "../hooks/App.context";
 import useLifecycleLog from "../hooks/useLifecycleLog";
@@ -14,12 +14,36 @@ import {
 
 import { ArrowClockwise, ArrowCounterClockwise } from "phosphor-react";
 
+export const classNames = (...classes) => classes.filter(Boolean).join(" ");
+
 export default function Buttons() {
   useLifecycleLog(Buttons);
 
+  const [sectionable, setSectionableState] = useState(true);
+  const [blockable, setBlockableState] = useState(true);
+  const [editable, setEditableState] = useState(true);
+  const [preview, setPreviewState] = useState(false);
+
+  const onSectionable = () => {
+    setSectionableState(!sectionable);
+    setSectionable(!sectionable);
+  };
+  const onBlockable = () => {
+    setBlockableState(!blockable);
+    setBlockable(!blockable);
+  };
+  const onEditable = () => {
+    setEditableState(!editable);
+    setEditable(!editable);
+  };
+  const onPreview = () => {
+    setPreviewState(!preview);
+    setPreview(!preview);
+  };
+
   const {
     state,
-    state: { canUndo, canRedo, sectionable, editable, blockable, preview },
+    // state: { canUndo, canRedo, sectionable, editable, blockable, preview },
     actions: {
       undo,
       redo,
@@ -34,29 +58,24 @@ export default function Buttons() {
     <>
       <CollectionIcon
         aria-label="Collection-Icon"
-        className="h-5 w-5 text-white fill-current cursor-pointer"
+        className={classNames(
+          sectionable ? "fill-current" : "",
+          "h-5 w-5 text-white cursor-pointer"
+        )}
         aria-hidden="true"
-        onClick={() => setSectionable(true)}
-      />
-      <CollectionIcon
-        aria-label="Collection-Icon"
-        className="h-5 w-5 text-white cursor-pointer"
-        aria-hidden="true"
-        onClick={() => setSectionable(false)}
+        onClick={onSectionable}
       />
 
       <PencilIcon
         aria-label="Collection-Icon"
-        className="h-5 w-5 text-white fill-current cursor-pointer"
+        className={classNames(
+          editable ? "fill-current" : "",
+          "h-5 w-5 text-white cursor-pointer"
+        )}
         aria-hidden="true"
-        onClick={() => setEditable(true)}
+        onClick={onEditable}
       />
-      <PencilIcon
-        aria-label="Collection-Icon"
-        className="h-5 w-5 text-white cursor-pointer"
-        aria-hidden="true"
-        onClick={() => setEditable(false)}
-      />
+
       <button
         className="text-blue-700 font-semibold text-primary hover:text-white border border-blue-500 hover:border-transparent rounded"
         onClick={() => setBlockable(true)}

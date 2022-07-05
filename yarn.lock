@@ -6608,9 +6608,13 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==
 
-"perfxhtml@link:../perfxhtml":
-  version "0.0.0"
-  uid ""
+perfxhtml@sevenxtech/perfxhtml#distpack:
+  version "0.1.9"
+  resolved "https://codeload.github.com/sevenxtech/perfxhtml/tar.gz/41bf4c05d11471b135dcede1dc4c1b9fc96568b4"
+  dependencies:
+    "@babel/core" "^7.17.10"
+    epitelete "^0.1.4"
+    node-html-parser "^5.3.3"
 
 phosphor-react@^1.4.1:
   version "1.4.1"
@@ -8071,9 +8075,11 @@ signal-exit@^3.0.2, signal-exit@^3.0.3:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
-"simple-text-editor-rcl@link:../simple-text-editor-rcl":
-  version "0.0.0"
-  uid ""
+simple-text-editor-rcl@sevenxtech/simple-text-editor-rcl#distpack:
+  version "6.16.0"
+  resolved "https://codeload.github.com/sevenxtech/simple-text-editor-rcl/tar.gz/88e8643be673c745eb00ba851e1e426251479da4"
+  dependencies:
+    use-deep-compare "^1.1.0"
 
 sisteransi@^1.0.5:
   version "1.0.5"

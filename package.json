@@ -5,15 +5,11 @@
   "keywords": [],
   "main": "src/index.js",
   "comments": {
-    "comment": "move to dependencies to get package from local or server",
-    "perfxhtml": [
-      "link:./../perfxhtml",
-      "sevenxtech/perfxhtml#distpack"
-    ],
-    "simple-text-editor-rcl": [
-      "link:./../simple-text-editor-rcl",
-      "sevenxtech/simple-text-editor-rcl"
-    ]
+    "comment": "Dependencies to get package from local or server",
+    "perfxhtml": "sevenxtech/perfxhtml#distpack",
+    "perfxhtml": "link:./../perfxhtml",
+    "simple-text-editor-rcl": "sevenxtech/simple-text-editor-rcl#distpack",
+    "simple-text-editor-rcl": "link:./../simple-text-editor-rcl"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
@@ -25,7 +21,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "simple-text-editor-rcl": "sevenxtech/simple-text-editor-rcl",
+    "simple-text-editor-rcl": "sevenxtech/simple-text-editor-rcl#distpack",
     "use-deep-compare": "1.1.0"
   },
   "devDependencies": {
