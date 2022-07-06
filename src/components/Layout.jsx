@@ -10,7 +10,17 @@ export default function Layout() {
 
   return (
     <div className="layout">
-      <div className="grid grid-flow-col auto-cols-fr m-3 gap-2">
+      <div className="flex m-3 gap-2">
+        <div className="w-96 border-2 border-secondary rounded-md">
+          <div className="flex items-center justify-between bg-secondary">
+            <div
+              aria-label="editor-pane"
+              className="h-8 px-4 flex justify-center items-center text-white text-xxs uppercase tracking-wider font-bold leading-3 truncate"
+            >
+              Footnotes
+            </div>
+          </div>
+        </div>
         <div className="bg-white border-b-2 border-secondary rounded-md shadow h-editor overflow-hidden">
           <div className="flex items-center justify-between bg-secondary">
             <div className="flex">
