@@ -1,12 +1,18 @@
+import React, { useContext } from "react";
 import ApplicationBar from "./ApplicationBar";
 import Editor from "./Editor";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 import Buttons from "./Buttons";
+import { AppContext } from "../hooks/App.context";
 
 import { LockClosedIcon, BookmarkIcon } from "@heroicons/react/outline";
 
 export default function Layout() {
   useLifecycleLog(Layout);
+
+  const {
+    state: {perfHtml},
+  } = useContext(AppContext);
 
   return (
     <div className="layout">
@@ -26,7 +32,7 @@ export default function Layout() {
             <div className="flex">
               <div className="bg-primary text-white py-2 uppercase tracking-wider text-xs font-semibold">
                 <span aria-label="editor-bookname" className="px-3">
-                  Philemon
+                  {perfHtml? perfHtml.headers.h.toString() :''}
                 </span>
                 <span
                   className="focus:outline-none bg-white py-4 bg-opacity-10"
