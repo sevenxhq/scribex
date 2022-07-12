@@ -16,6 +16,7 @@ export const embedPreviewInGrafts = ({ graftHtml, perfHtml }) => {
 };
 
 export const embedPreviewTextInGrafts = ({ perfHtml, sequenceId }) => {
+  console.log(perfHtml);
   const parser = new DOMParser();
   const html = perfHtml.sequencesHtml[sequenceId];
   // parse the full content by divs for rendering
@@ -33,7 +34,7 @@ export const embedPreviewTextInGrafts = ({ perfHtml, sequenceId }) => {
     // console.log(previewText);
   });
 
-  const _html = dom.getElementById("sequence").outerHTML;
+  const _html = dom.getElementsByClassName("sequence").outerHTML;
   // console.log(_html);
 
   return _html;
@@ -50,7 +51,7 @@ export const embedSequencesInGrafts = ({ perfHtml, sequenceId }) => {
     const { target } = graft.dataset;
     const embededSequencesHtml = embedSequencesInGrafts({
       perfHtml,
-      sequenceId: target
+      sequenceId: target,
     });
     graft.innerHTML = embededSequencesHtml;
     console.log(graft);
@@ -66,7 +67,7 @@ export const embedSequencesInMainGrafts = ({ perfHtml }) => {
   const { mainSequenceId } = perfHtml;
   const embeddedSequencesInMainGrafts = embedSequencesInGrafts({
     perfHtml,
-    sequenceId: mainSequenceId
+    sequenceId: mainSequenceId,
   });
 
   console.log(
