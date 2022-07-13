@@ -107,7 +107,7 @@ export default function Layout() {
               </div>
             </div>
           </div>
-          <div className="border-l-2 border-r-2 border-secondary pb-16 prose-sm max-w-none overflow-y-auto h-full no-scrollbars">
+          <div className="border-l-2 border-r-2 border-secondary pb-16 max-w-none overflow-y-auto h-full no-scrollbars">
             <Editor />
           </div>
         </div>

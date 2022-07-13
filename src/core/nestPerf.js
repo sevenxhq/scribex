@@ -16,9 +16,10 @@ export const embedPreviewInGrafts = ({ graftHtml, perfHtml }) => {
 };
 
 export const embedPreviewTextInGrafts = ({ perfHtml, sequenceId }) => {
-  console.log(perfHtml);
+  console.log("perfHtml", perfHtml);
   const parser = new DOMParser();
   const html = perfHtml.sequencesHtml[sequenceId];
+  console.log("html", html);
   // parse the full content by divs for rendering
   const dom = parser.parseFromString(html, "text/html");
   const grafts = [...dom.getElementsByClassName("graft")];
@@ -34,8 +35,9 @@ export const embedPreviewTextInGrafts = ({ perfHtml, sequenceId }) => {
     // console.log(previewText);
   });
 
-  const _html = dom.getElementsByClassName("sequence").outerHTML;
-  // console.log(_html);
+  // console.log("_html", dom);
+  const _html = dom.getElementsByClassName("sequence")[0].outerHTML;
+  console.log("_html", _html);
 
   return _html;
 };
