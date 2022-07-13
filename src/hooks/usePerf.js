@@ -13,21 +13,26 @@ export default function usePerf({
   docSetId,
   bookCode,
   verbose,
-  htmlCssMapper,
+  htmlMap,
 }) {
   const [isSaving, startSaving] = useTransition();
   const [perfHtml, setPerfHtml] = useState();
   const epiPerfHtml = useDeepCompareMemo(
     () =>
       ready &&
-      new PerfXHtml({ proskomma, docSetId, options: { historySize: 100 } }),
+      new PerfXHtml({
+        proskomma,
+        docSetId,
+        htmlMap,
+        options: { historySize: 100 },
+      }),
     [proskomma, ready, docSetId]
   );
 
   useDeepCompareEffect(() => {
     if (epiPerfHtml) {
-      epiPerfHtml.readHtml(bookCode, htmlCssMapper).then((_perfHtml) => {
-        //remove htmlCssMapper for default classes
+      epiPerfHtml.readHtml(bookCode, htmlMap).then((_perfHtml) => {
+        //remove htmlMap for default classes
         setPerfHtml(_perfHtml);
       });
     }

@@ -21,16 +21,16 @@
   @apply bg-primary-50 outline-none rounded-sm;
 }
 
-.block {
-  @apply mx-3;
+p.paragraph {
+  @apply mx-3 py-1;
 }
 
-.chapter-number {
+.mark.chapter {
   @apply text-xl font-bold mr-2 mt-10 break-before-column before:block;
 }
 
-.verse-number {
-  @apply text-xxs mr-1 text-primary align-super;
+.mark.verses {
+  @apply text-xs mr-1 text-primary font-semibold;
 }
 
 .major-title,
