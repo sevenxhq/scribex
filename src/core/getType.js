@@ -11,9 +11,8 @@ export const getTypeFromPerf = ({ perfHtml, sequenceId }) => {
 };
 
 export const getTypeFromSequenceHtml = ({ sequenceHtml }) => {
-  console.log("sequenceHtml", sequenceHtml);
   let type = sequenceHtml?.match(/data-[Tt]ype="(\w+)"/);
   type &&= type[1];
-  console.log("type", type);
+  // console.log("type", type);
   return type;
 };

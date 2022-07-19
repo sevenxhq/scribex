@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState, useMemo, useEffect, startTransition } from "react";
 import { useDeepCompareCallback, useDeepCompareMemo } from "use-deep-compare";
-import { PerfEditor } from "simple-text-editor-rcl";
+import { HtmlPerfEditor } from "@xelah/type-perf-html";
 
 import useLifecycleLog from "../hooks/useLifecycleLog";
 import { AppContext } from "../hooks/App.context";
@@ -20,6 +20,7 @@ export default function PerfEditorWrapper({ sequenceId }) {
     state: { perfHtml, sectionable, blockable, editable, preview, verbose },
     actions: { addSequenceId, savePerfHtml },
   } = useContext(AppContext);
+console.log('pergHtnl',perfHtml);
 
   const sequenceHtml = useDeepCompareMemo(() => (
     embedPreviewTextInGrafts({ perfHtml, sequenceId })
@@ -56,7 +57,7 @@ export default function PerfEditorWrapper({ sequenceId }) {
   };
 
   const props = {
-    content: sequenceHtml,
+    htmlperf: perfHtml,
     onContent: onContentHandler,
     components: {
       section: Section,
@@ -81,7 +82,7 @@ export default function PerfEditorWrapper({ sequenceId }) {
 
   return (
     <div className="perf-editor-wrapper" key={sequenceId}>
-      <PerfEditor key={sequenceId} {...props} />
+      <HtmlPerfEditor key={sequenceId} {...props} />
     </div>
   );
 };

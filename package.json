@@ -17,15 +17,15 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "@xelah/type-perf-html": "^1.0.0-beta.3",
+    "epitelete-perf-html": "link:./../Epitelete-Perf-Html",
     "lodash.isequal": "^4.5.0",
-    "perfxhtml": "link:./../perfxhtml",
     "phosphor-react": "^1.4.1",
     "prop-types": "15.8.1",
-    "proskomma-react-hooks": "2.3.4",
+    "proskomma-react-hooks": "2.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-scripts": "5.0.1",
-    "simple-text-editor-rcl": "link:./../simple-text-editor-rcl",
     "use-deep-compare": "1.1.0"
   },
   "devDependencies": {
