@@ -14,7 +14,7 @@ const _documents = [
   {
     selectors: { org: "unfoldingWord", lang: "en", abbr: "ult" },
     bookCode: "psa",
-    url: "/unfoldingWord-en_ult.psa.usfm",
+    url: "/unfoldingWord-en_ult.psa-short.usfm",
   },
 ];
 
@@ -47,6 +47,7 @@ export default function useApplicationState(props) {
     // proskomma, ready, docSetId, bookCode, verbose
   });
   const { perfHtml } = perfState;
+  console.log('perfhtml',perfHtml)
 
   useDeepCompareEffect(() => {
     if (perfHtml && perfHtml.mainSequenceId !== state.sequenceIds[0]) {

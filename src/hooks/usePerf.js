@@ -5,7 +5,7 @@ import {
   useDeepCompareMemo,
 } from "use-deep-compare";
 import isEqual from "lodash.isequal";
-import PerfXHtml from "perfxhtml";
+import EpiteletePerfHtml from "epitelete-perf-html";
 
 export default function usePerf({
   proskomma,
@@ -20,7 +20,7 @@ export default function usePerf({
   const epiPerfHtml = useDeepCompareMemo(
     () =>
       ready &&
-      new PerfXHtml({
+      new EpiteletePerfHtml({
         proskomma,
         docSetId,
         htmlMap,

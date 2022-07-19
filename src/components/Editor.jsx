@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AppContext } from "../hooks/App.context";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 
+import EditorWrapper from "./EditorWrapper";
 import PerfEditorWrapper from "./PerfEditorWrapper";
 
 export default function Editor() {
@@ -25,7 +26,7 @@ export default function Editor() {
   return (
     <div className="editor" style={style}>
       {!sequenceId && <p>loading</p> }
-      {sequenceId && <PerfEditorWrapper sequenceId={sequenceId} /> }
+      {sequenceId && <EditorWrapper sequenceId={sequenceId} /> }
     </div>
   );
 };

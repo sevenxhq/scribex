@@ -8,18 +8,14 @@ import useLifecycleLog from "../hooks/useLifecycleLog";
 import ContextMenu from "./ContextMenu";
 
 export default function Block({ content, style, index, verbose, ...props }) {
-  const {
-    state: { preview },
-  } = useContext(AppContext);
-
+  const { state: { preview } } = useContext(AppContext);
+  // console.log("EDITABLE CONTENT",content)
   useLifecycleLog(Block, index);
   let component;
   // let editable = !!content.match(/class="[\w\s]*block[\w\s]*"/);
-  // let editable = !!content.match(/class="[\w\s]*block[\w\s]/);
   let editable = !!content.match(/class="[\w\s]*paragraph[\w\s]/);
-  if (editable)
-    component = (
-      // <ContextMenu>
+  if (editable) component = (
+    // <ContextMenu>
       <div {...props} />
       // </ContextMenu>
     );
