@@ -11,23 +11,18 @@ import SectionHeading from "./SectionHeading";
 import SectionBody from "./sectionBody";
 import Block from "./Block";
 
-import _htmlPerf from './../data/tit-fra_fraLSG-perf.html.json';
-
 const components = {
   sectionHeading: SectionHeading,
 }
 
 export default function EditorWrapper({ sequenceId }) {
   const {
-    state: { perfHtml},
+    state: { perfHtml, sectionable, blockable, editable, preview, verbose },
+    actions: {savePerfHtml,setVerbose,setPreview ,setBlockable,setSectionable,setEditable,setContent},
   } = useContext(AppContext);
   const [htmlPerf, setHtmlPerf] = useState(perfHtml);
   const [sequenceIds, setSequenceIds] = useState([htmlPerf.mainSequenceId]);
-  const [sectionable, setSectionable] = useState(true);
-  const [blockable, setBlockable] = useState(true);
-  const [editable, setEditable] = useState(true);
-  const [preview, setPreview] = useState(true);
-  const [verbose, setVerbose] = useState(false);
+
 
   const onSectionable = () => { setSectionable(!sectionable); };
   const onBlockable = () => { setBlockable(!blockable); };
@@ -51,23 +46,10 @@ export default function EditorWrapper({ sequenceId }) {
     onHtmlPerf: setHtmlPerf,
     components,
     options,
-    onContent,
   };
-
-  const buttons = (
-    <div className="buttons">
-      <button style={(sectionable ? {borderStyle: 'inset'} : {})} onClick={onSectionable}>Sectionable</button>
-      <button style={(blockable ? {borderStyle: 'inset'} : {})} onClick={onBlockable}>Blockable</button>
-      <button style={(editable ? {borderStyle: 'inset'} : {})} onClick={onEditable}>Editable</button>
-      <button style={(preview ? {borderStyle: 'inset'} : {})} onClick={onPreview}>Preview</button>
-    </div>
-  );
-
   return (
     <div >
-      {buttons}
       <HtmlPerfEditor {...props} />
-      {buttons}
     </div>
   );
 };

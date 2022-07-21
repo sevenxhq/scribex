@@ -2276,12 +2276,11 @@
   dependencies:
     use-deep-compare "^1.1.0"
 
-"@xelah/type-perf-html@^1.0.0-beta.3":
-  version "1.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@xelah/type-perf-html/-/type-perf-html-1.0.0-beta.3.tgz#47e16295c56bd985af3fa28c239c0a892cb0f644"
-  integrity sha512-hAnVgf5TIjVoc+Wa8/p38VnobTmloXAAGPKLMyM2b/oZ9gtVJlDSqj53IeCHIMZ4sq3NMhS5y0B/8o14Ob5gYQ==
+"@xelah/type-perf-html@file:.yalc/@xelah/type-perf-html":
+  version "1.0.0-beta.5"
   dependencies:
     "@xelah/core" "^1.0.0-beta.2"
+    lodash.isequal "^4.5.0"
     use-deep-compare "^1.1.0"
 
 "@xtuc/ieee754@^1.2.0":

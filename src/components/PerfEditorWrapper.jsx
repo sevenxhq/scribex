@@ -17,8 +17,8 @@ export default function PerfEditorWrapper({ sequenceId }) {
   useLifecycleLog(PerfEditorWrapper, sequenceId);
 
   const {
-    state: { perfHtml, sectionable, blockable, editable, preview, verbose },
-    actions: { addSequenceId, savePerfHtml },
+    state: { perfHtml, sectionable,sequenceIds, blockable, editable, preview, verbose },
+    actions: { addSequenceId, savePerfHtml ,setBlockable},
   } = useContext(AppContext);
 console.log('pergHtnl',perfHtml);
 
