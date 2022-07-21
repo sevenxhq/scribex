@@ -37,13 +37,23 @@ export default function SectionHeading({ type: _type, content, show, index, verb
   let type = index && `Chapter ${index}`;
   type ||= (_type === "main") ? "Title & Introduction" : _type;
 
-  return (
-    <div className='sectionHeading' {...props}>
-      <span className='expand'>
-        {show ? '' : '...'}
-        {type}
-        {show ? '' : '...'}
-      </span>
-    </div>
-  );
+  // return (
+  //   <div className='sectionHeading' {...props}>
+  //     <span className='expand'>
+  //       {show ? '' : '...'}
+  //       {type}
+  //       {show ? '' : '...'}
+  //     </span>
+  //   </div>
+  // );
+  const component = useDeepCompareMemo(
+        () => (
+          <h2 {...props} className="section-heading" variant="h5">
+            {type}
+          </h2>
+        ),
+        [props, type]
+      );
+    
+      return component;
 };

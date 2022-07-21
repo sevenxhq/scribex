@@ -43,7 +43,6 @@ export default function Buttons() {
 
   const {
     state,
-    // state: { canUndo, canRedo, sectionable, editable, blockable, preview },
     actions: {
       undo,
       redo,
