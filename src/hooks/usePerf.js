@@ -16,8 +16,9 @@ export default function usePerf({
   htmlMap,
 }) {
   const [isSaving, startSaving] = useTransition();
-  const [perfHtml, setPerfHtml] = useState();
-  const epiPerfHtml = useDeepCompareMemo(
+  const [htmlPerf, setHtmlPerf] = useState();
+
+  const epiteletePerfHtml = useDeepCompareMemo(
     () =>
       ready &&
       new EpiteletePerfHtml({
@@ -30,61 +31,62 @@ export default function usePerf({
   );
 
   useDeepCompareEffect(() => {
-    if (epiPerfHtml) {
-      epiPerfHtml.readHtml(bookCode, htmlMap).then((_perfHtml) => {
+    if (epiteletePerfHtml) {
+      epiteletePerfHtml.readHtml(bookCode, htmlMap).then((_htmlPerf) => {
         //remove htmlMap for default classes
-        setPerfHtml(_perfHtml);
+        setHtmlPerf(_htmlPerf);
       });
     }
-  }, [epiPerfHtml, bookCode]);
+  }, [epiteletePerfHtml, bookCode]);
+  console.log('perf from proskomma',htmlPerf);
+  
 
-  const savePerfHtml = useDeepCompareCallback(
-    ({ sequenceId, sequenceHtml }) => {
-      let _perfHtml = { ...perfHtml };
-      _perfHtml.sequencesHtml[sequenceId] = sequenceHtml;
+  const saveHtmlPerf = useDeepCompareCallback( (_htmlPerf,{ sequenceId, sequenceHtml }) => {
 
-      if (!isEqual(perfHtml, _perfHtml)) setPerfHtml(_perfHtml);
+    // _perfHtml.sequencesHtml[sequenceId] = sequenceHtml;
 
-      startSaving(async () => {
-        const newPerfHtml = await epiPerfHtml?.writeHtml(
-          bookCode,
-          sequenceId,
-          _perfHtml
-        );
-        if (verbose)
-          console.log({ info: "Saved sequenceId", bookCode, sequenceId });
+    if (!isEqual(htmlPerf, _htmlPerf)) setPerfHtml(_htmlPerf);
 
-        if (!isEqual(perfHtml, newPerfHtml)) setPerfHtml(newPerfHtml);
-      });
-    },
-    [perfHtml, bookCode]
+    startSaving(async () => {
+      const newPerfHtml = await epiteletePerfHtml?.writeHtml(
+        bookCode,
+        sequenceId,
+        _perfHtml
+      );
+      if (verbose)
+        console.log({ info: "Saved sequenceId", bookCode, sequenceId });
+
+      if (!isEqual(htmlPerf, newHtmlPerf)) setHtmlPerf(newPerfHtml);
+    });
+  },
+    [htmlPerf, bookCode]
   );
 
   const undo = async () => {
-    const newPerfHtml = await epiPerfHtml?.undoHtml(bookCode);
-    setPerfHtml(newPerfHtml);
+    const newPerfHtml = await epiteletePerfHtml?.undoHtml(bookCode);
+    setHtmlPerf(newPerfHtml);
   };
 
   const redo = async () => {
-    const newPerfHtml = await epiPerfHtml?.redoHtml(bookCode);
-    setPerfHtml(newPerfHtml);
+    const newPerfHtml = await epiteletePerfHtml?.redoHtml(bookCode);
+    setHtmlPerf(newPerfHtml);
   };
 
   const canUndo =
-    (epiPerfHtml?.canUndo && epiPerfHtml?.canUndo(bookCode)) || false;
+    (epiteletePerfHtml?.canUndo && epiteletePerfHtml?.canUndo(bookCode)) || false;
   const canRedo =
-    (epiPerfHtml?.canRedo && epiPerfHtml?.canRedo(bookCode)) || false;
+    (epiteletePerfHtml?.canRedo && epiteletePerfHtml?.canRedo(bookCode)) || false;
 
   const state = {
     bookCode,
-    perfHtml,
+    htmlPerf,
     canUndo,
     canRedo,
     isSaving,
   };
 
   const actions = {
-    savePerfHtml,
+    saveHtmlPerf,
     undo,
     redo,
   };

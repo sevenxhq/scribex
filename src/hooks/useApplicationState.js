@@ -46,14 +46,13 @@ export default function useApplicationState(props) {
     htmlMap, //uncomment if pasing custom classes.
     // proskomma, ready, docSetId, bookCode, verbose
   });
-  const { perfHtml } = perfState;
-  console.log('perfhtml',perfHtml)
+  const { htmlPerf } = perfState;
 
   useDeepCompareEffect(() => {
-    if (perfHtml && perfHtml.mainSequenceId !== state.sequenceIds[0]) {
-      actions.setSequenceIds([perfHtml?.mainSequenceId]);
+    if (htmlPerf && htmlPerf.mainSequenceId !== state.sequenceIds[0]) {
+      actions.setSequenceIds([htmlPerf?.mainSequenceId]);
     }
-  }, [perfHtml, state.sequenceIds]);
+  }, [htmlPerf, state.sequenceIds]);
 
   return {
     state: { ...state, ...perfState, isLoading },

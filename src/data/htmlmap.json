@@ -10,6 +10,9 @@
   "graft": {
     "title": {
       "tagName": "p"
+    },
+    "footnote":{
+      "tagName":"a"
     }
   },
   "ms": {
