@@ -12,7 +12,7 @@
       "tagName": "p"
     },
     "footnote":{
-      "tagName":"a"
+      "tagName":"span"
     }
   },
   "ms": {

@@ -9,7 +9,7 @@ import SectionHeading from "./SectionHeading";
 import SectionBody from "./sectionBody";
 import { HtmlPerfEditor } from "@xelah/type-perf-html";
 
-export default function Editor() {
+export default function Editor({setFootNotes}) {
   const {
     state: {
       sequenceIds,
@@ -29,7 +29,8 @@ export default function Editor() {
   useLifecycleLog(Editor);
   const style = (isSaving || isLoading || !sequenceId) ? { cursor: 'progress' } : {};
 
-  const props = {
+  const props2 = {
+    
     htmlPerf: htmlPerf,
     onHtmlPerf: saveHtmlPerf,
     sequenceIds,
@@ -51,13 +52,14 @@ export default function Editor() {
     // },
     decorators: {},
     verbose,
+    setFootNotes,
   };
 
 
   return (
     <div className="editor" style={style}>
       {!sequenceId && <p>loading</p> }
-      {sequenceId && <HtmlPerfEditor {...props} /> }
+      {sequenceId && <HtmlPerfEditor {...props2} /> }
     </div>
   );
 };

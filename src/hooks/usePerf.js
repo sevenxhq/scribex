@@ -38,7 +38,6 @@ export default function usePerf({
       });
     }
   }, [epiteletePerfHtml, bookCode]);
-  console.log('perf from proskomma',htmlPerf);
   
 
   const saveHtmlPerf = useDeepCompareCallback( (_htmlPerf,{ sequenceId, sequenceHtml }) => {
