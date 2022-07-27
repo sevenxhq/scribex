@@ -29,8 +29,7 @@ console.log({footNote});
               Footnotes             
             </div>            
           </div>
-          <p class="paragraph usfm f" data-type="paragraph" data-subtype-ns="usfm" data-subtype="f"><span class="graft note_caller" data-type="graft" data-subtype="note_caller" data-target="MTczMmU0MTct" data-previewtext="+"></span> <span class="wrapper usfm span" data-type="wrapper" data-subtype-ns="usfm" data-subtype="span">The Hebrew text can be read either as </span><span class="wrapper usfm span" data-type="wrapper" data-subtype-ns="usfm" data-subtype="span">established praise </span> or <span class="wrapper usfm span" data-type="wrapper" data-subtype-ns="usfm" data-subtype="span">established strength </span> .</p>
-          {footNote ? footNote.footNote : ''}
+          {footNote ? footNote.content : ''}
           {/* <Editor setFootNotes={content =>setFootNote(content)}/> */}
         </div>
         <div className="bg-white border-b-2 border-secondary rounded-md shadow h-editor overflow-hidden">
