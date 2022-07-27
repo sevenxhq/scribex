@@ -1,12 +1,16 @@
+import { useState } from "react";
 import ApplicationBar from "./ApplicationBar";
 import Editor from "./Editor";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 import Buttons from "./Buttons";
 
+
 import { LockClosedIcon, BookmarkIcon } from "@heroicons/react/outline";
 
 export default function Layout() {
   useLifecycleLog(Layout);
+  const [footNote, setFootNote] = useState()
+console.log({footNote});
 
   return (
     <div className="layout">
@@ -17,16 +21,19 @@ export default function Layout() {
               aria-label="editor-pane"
               className="h-8 px-4 flex justify-center items-center text-white text-xxs uppercase tracking-wider font-bold leading-3 truncate"
             >
-              Footnotes
-            </div>
+              Footnotes             
+            </div>            
           </div>
+          <p class="paragraph usfm f" data-type="paragraph" data-subtype-ns="usfm" data-subtype="f"><span class="graft note_caller" data-type="graft" data-subtype="note_caller" data-target="MTczMmU0MTct" data-previewtext="+"></span> <span class="wrapper usfm span" data-type="wrapper" data-subtype-ns="usfm" data-subtype="span">The Hebrew text can be read either as </span><span class="wrapper usfm span" data-type="wrapper" data-subtype-ns="usfm" data-subtype="span">established praise </span> or <span class="wrapper usfm span" data-type="wrapper" data-subtype-ns="usfm" data-subtype="span">established strength </span> .</p>
+          {footNote ? footNote.footNote : ''}
+          {/* <Editor setFootNotes={content =>setFootNote(content)}/> */}
         </div>
         <div className="bg-white border-b-2 border-secondary rounded-md shadow h-editor overflow-hidden">
           <div className="flex items-center justify-between bg-secondary">
             <div className="flex">
               <div className="bg-primary text-white py-2 uppercase tracking-wider text-xs font-semibold">
                 <span aria-label="editor-bookname" className="px-3">
-                  Philemon
+                  Psalms
                 </span>
                 <span
                   className="focus:outline-none bg-white py-4 bg-opacity-10"
@@ -102,7 +109,7 @@ export default function Layout() {
             </div>
           </div>
           <div className="border-l-2 border-r-2 border-secondary pb-16 max-w-none overflow-y-auto h-full no-scrollbars">
-            <Editor />
+            <Editor setFootNotes={content =>setFootNote(content)}/>
           </div>
         </div>
       </div>

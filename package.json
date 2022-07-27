@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
-    "@xelah/type-perf-html": "file:.yalc/@xelah/type-perf-html",
     "epitelete-perf-html": "link:./../Epitelete-Perf-Html",
     "lodash.isequal": "^4.5.0",
     "phosphor-react": "^1.4.1",
