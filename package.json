@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
-    "epitelete-perf-html": "link:./../Epitelete-Perf-Html",
+    "epitelete-perf-html": "^0.2.4",
     "lodash.isequal": "^4.5.0",
     "phosphor-react": "^1.4.1",
     "prop-types": "15.8.1",

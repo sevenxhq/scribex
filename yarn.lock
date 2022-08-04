@@ -2275,7 +2275,7 @@
     use-deep-compare "^1.1.0"
 
 "@xelah/type-perf-html@file:.yalc/@xelah/type-perf-html":
-  version "1.0.0-beta.5"
+  version "1.0.0-beta.8"
   dependencies:
     "@xelah/core" "^1.0.0-beta.2"
     lodash.isequal "^4.5.0"
@@ -3798,11 +3798,16 @@ entities@^2.0.0:
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.2.0.tgz#098dc90ebb83d8dffa089d55256b351d34c4da55"
   integrity sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
 
-"epitelete-perf-html@link:../Epitelete-Perf-Html":
-  version "0.0.0"
-  uid ""
+epitelete-perf-html@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/epitelete-perf-html/-/epitelete-perf-html-0.2.4.tgz#2b61fd07f291eca2128c45554b6052da56e27798"
+  integrity sha512-gHRcgxmTGFnIW6QT/H/eG+osQSL6QL3ZniH4mZCddVQVi13yqCtyM6yHBe9N/OVlhDUsbFhcsPn/usno+YHF0Q==
+  dependencies:
+    "@babel/core" "^7.17.10"
+    epitelete "^0.2.2"
+    node-html-parser "^5.3.3"
 
-epitelete@^0.2.1:
+epitelete@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/epitelete/-/epitelete-0.2.2.tgz#70a642fd581bcc31b25342ae956646f7ec70f75c"
   integrity sha512-z4GC8Dy7kTUZK9eAVgY5nDp4NZP0V14WOwaU/oLrxBWdUmSzAG60bgNTplDSOHqfnAiZ362FdMcbzIqr6eNSow==
