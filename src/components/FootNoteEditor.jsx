@@ -6,7 +6,7 @@ import useLifecycleLog from "../hooks/useLifecycleLog";
 
 import { HtmlPerfEditor } from "@xelah/type-perf-html";
 
-export default function Editor({setFootNotes,savedFootNote}) {
+export default function FootNoteEditor({ setFootNotes, savedFootNote }) {
   const {
     state: {
       sequenceIds,
@@ -21,12 +21,25 @@ export default function Editor({setFootNotes,savedFootNote}) {
     },
     actions: { addSequenceId, saveHtmlPerf },
   } = useContext(AppContext);
+  // const sequenceId = sequenceIds.at(-1);
+
+  useLifecycleLog(FootNoteEditor);
+  const style =
+    isSaving || isLoading || !sequenceId ? { cursor: "progress" } : {};
+
+  if (htmlPerf) {
+    const sequences = htmlPerf.sequencesHtml;
+    let footNoteArr = [];
+    for (const [sequenceId, sequenceHtml] of Object.entries(sequences)) {
+      if (!!sequenceHtml.match(/data-type="footnote"/))
+        footNoteArr.push([sequenceId, sequenceHtml]);
+    }
+    const footNoteSequences = Object.fromEntries(footNoteArr);
+    console.log({ footNoteSequences });
+    htmlPerf.sequencesHtml = footNoteSequences
+  }
   const sequenceId = sequenceIds.at(-1);
-  console.log({ htmlPerf, sequenceIds })
-  useLifecycleLog(Editor);
-  const style = (isSaving || isLoading || !sequenceId) ? { cursor: 'progress' } : {};
   const props = {
-    
     htmlPerf: htmlPerf,
     onHtmlPerf: saveHtmlPerf,
     sequenceIds,
@@ -35,7 +48,7 @@ export default function Editor({setFootNotes,savedFootNote}) {
       sectionable,
       blockable,
       editable,
-      preview
+      preview,
     },
     // handlers: {
     //   onSectionClick,
@@ -44,14 +57,13 @@ export default function Editor({setFootNotes,savedFootNote}) {
     decorators: {},
     verbose,
     setFootNotes,
-    savedFootNote
+    savedFootNote,
   };
 
-
   return (
-    <div className="editor" style={style}>
-      {!sequenceId && <p>loading</p> }
-      {sequenceId && <HtmlPerfEditor {...props} /> }
+    <div className='editor' style={style}>
+      {!sequenceId && <p>loading</p>}
+      {sequenceId && <HtmlPerfEditor {...props} />}
     </div>
   );
-};
+}

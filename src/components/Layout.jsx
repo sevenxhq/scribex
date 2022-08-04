@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import { useEffect, useState , useContext} from "react";
 import ApplicationBar from "./ApplicationBar";
 import Editor from "./Editor";
+import FootNoteEditor from "./FootNoteEditor";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 import Buttons from "./Buttons";
 import { AppContext } from "../hooks/App.context";
@@ -9,9 +10,16 @@ import { AppContext } from "../hooks/App.context";
 import { LockClosedIcon, BookmarkIcon } from "@heroicons/react/outline";
 
 export default function Layout() {
+
+  const  {state: { bookName }} = useContext(AppContext);  
+
   useLifecycleLog(Layout);
-  const [footNote, setFootNote] = useState()
-console.log({footNote});
+  const [footNote, setFootNote] = useState();
+  const [savedFootNote, setSavedFootNote]=useState('savedFootnote');
+
+const saveFootnote = (text)  =>{
+  setSavedFootNote(text);
+  console.log('Edited Footnote', savedFootnote)}
 
   const {
     state: {perfHtml},
@@ -20,24 +28,26 @@ console.log({footNote});
   return (
     <div className="layout">
       <div className="flex m-3 gap-2">
-        <div className="w-96 border-2 border-secondary rounded-md">
+      <div className="w-96 border-2 border-secondary rounded-md">
           <div className="flex items-center justify-between bg-secondary">
             <div
               aria-label="editor-pane"
               className="h-8 px-4 flex justify-center items-center text-white text-xxs uppercase tracking-wider font-bold leading-3 truncate"
             >
-              Footnotes             
+              Footnotes      
+              <button onClick={()=>saveFootnote('text')}>save</button>       
             </div>            
           </div>
-          {footNote ? footNote.content : ''}
-          {/* <Editor setFootNotes={content =>setFootNote(content)}/> */}
+          {footNote ? <div contentEditable="true" dangerouslySetInnerHTML={{__html:footNote.content}}/> : ''}
+          {/* <FootNoteEditor setFootNotes={content =>setFootNote(content)} {...savedFootNote}/> */}
+          
         </div>
         <div className="bg-white border-b-2 border-secondary rounded-md shadow h-editor overflow-hidden">
           <div className="flex items-center justify-between bg-secondary">
             <div className="flex">
               <div className="bg-primary text-white py-2 uppercase tracking-wider text-xs font-semibold">
                 <span aria-label="editor-bookname" className="px-3">
-                  {perfHtml? perfHtml.headers.h.toString() :''}
+                  {bookName}
                 </span>
                 <span
                   className="focus:outline-none bg-white py-4 bg-opacity-10"
@@ -113,7 +123,7 @@ console.log({footNote});
             </div>
           </div>
           <div className="border-l-2 border-r-2 border-secondary pb-16 max-w-none overflow-y-auto h-full no-scrollbars">
-            <Editor setFootNotes={content =>setFootNote(content)}/>
+            <Editor setFootNotes={content =>setFootNote(content)} {...savedFootNote}/>
           </div>
         </div>
       </div>
