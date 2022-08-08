@@ -1,7 +1,6 @@
 import { useEffect, useState , useContext} from "react";
 import ApplicationBar from "./ApplicationBar";
 import Editor from "./Editor";
-import FootNoteEditor from "./FootNoteEditor";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 import Buttons from "./Buttons";
 import { AppContext } from "../hooks/App.context";
@@ -15,11 +14,6 @@ export default function Layout() {
 
   useLifecycleLog(Layout);
   const [footNote, setFootNote] = useState();
-  const [savedFootNote, setSavedFootNote]=useState('savedFootnote');
-
-const saveFootnote = (text)  =>{
-  setSavedFootNote(text);
-  console.log('Edited Footnote', savedFootnote)}
 
   const {
     state: {perfHtml},
@@ -35,11 +29,10 @@ const saveFootnote = (text)  =>{
               className="h-8 px-4 flex justify-center items-center text-white text-xxs uppercase tracking-wider font-bold leading-3 truncate"
             >
               Footnotes      
-              <button onClick={()=>saveFootnote('text')}>save</button>       
+              {/* <button onClick={()=>saveFootnote('text')}>save</button>        */}
             </div>            
           </div>
           {footNote ? <div contentEditable="true" dangerouslySetInnerHTML={{__html:footNote.content}}/> : ''}
-          {/* <FootNoteEditor setFootNotes={content =>setFootNote(content)} {...savedFootNote}/> */}
           
         </div>
         <div className="bg-white border-b-2 border-secondary rounded-md shadow h-editor overflow-hidden">
@@ -123,7 +116,7 @@ const saveFootnote = (text)  =>{
             </div>
           </div>
           <div className="border-l-2 border-r-2 border-secondary pb-16 max-w-none overflow-y-auto h-full no-scrollbars">
-            <Editor setFootNotes={content =>setFootNote(content)} {...savedFootNote}/>
+            <Editor setFootNotes={content =>setFootNote(content)} />
           </div>
         </div>
       </div>

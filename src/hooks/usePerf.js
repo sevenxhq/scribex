@@ -44,18 +44,18 @@ export default function usePerf({
 
     // _perfHtml.sequencesHtml[sequenceId] = sequenceHtml;
 
-    if (!isEqual(htmlPerf, _htmlPerf)) setPerfHtml(_htmlPerf);
+    if (!isEqual(htmlPerf, _htmlPerf)) setHtmlPerf(_htmlPerf);
 
     startSaving(async () => {
-      const newPerfHtml = await epiteletePerfHtml?.writeHtml(
+      const newHtmlPerf = await epiteletePerfHtml?.writeHtml(
         bookCode,
         sequenceId,
-        _perfHtml
+        _htmlPerf
       );
       if (verbose)
         console.log({ info: "Saved sequenceId", bookCode, sequenceId });
 
-      if (!isEqual(htmlPerf, newHtmlPerf)) setHtmlPerf(newPerfHtml);
+      if (!isEqual(htmlPerf, newHtmlPerf)) setHtmlPerf(newHtmlPerf);
     });
   },
     [htmlPerf, bookCode]
