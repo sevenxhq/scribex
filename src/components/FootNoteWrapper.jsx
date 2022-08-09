@@ -4,9 +4,9 @@ import { useCallback, useContext } from "react";
 import { AppContext } from "../hooks/App.context";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 
-import { HtmlPerfEditor, FootNoteEditor } from "@xelah/type-perf-html";
+import {  FootNoteEditor } from "@xelah/type-perf-html";
 
-export default function Editor({ setFootNotes }) {
+export default function FootNoteWrapper({ fNoteSequenceId,setFootNotes }) {
   const {
     state: {
       sequenceIds,
@@ -21,8 +21,8 @@ export default function Editor({ setFootNotes }) {
     },
     actions: { addSequenceId, saveHtmlPerf },
   } = useContext(AppContext);
-  const sequenceId = sequenceIds.at(-1);
-  useLifecycleLog(Editor);
+  const sequenceId = fNoteSequenceId;
+  useLifecycleLog(FootNoteWrapper);
   const style =
     isSaving || isLoading || !sequenceId ? { cursor: "progress" } : {};
 
@@ -48,12 +48,12 @@ export default function Editor({ setFootNotes }) {
         handlers,
       };
       // addSequenceId(sequenceId)
-      return (
+      // return (
         
         
-          <HtmlPerfEditor {..._props} />
+      //     <HtmlPerfEditor {..._props} />
        
-      );
+      // );
     }
   );
 
@@ -62,6 +62,7 @@ export default function Editor({ setFootNotes }) {
     htmlPerf: htmlPerf,
     onHtmlPerf: saveHtmlPerf,
     sequenceIds,
+    sequenceId,
     addSequenceId,
     options: {
       sectionable,
@@ -80,7 +81,7 @@ export default function Editor({ setFootNotes }) {
   return (
     <div className='editor' style={style}>
       {!sequenceId && <p>loading</p>}
-      {sequenceId && <HtmlPerfEditor {...props} />}
+      {sequenceId && <FootNoteEditor {...props} />}
     </div>
   );
 }

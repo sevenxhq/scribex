@@ -7,13 +7,21 @@ import { AppContext } from "../hooks/App.context";
 
 
 import { LockClosedIcon, BookmarkIcon } from "@heroicons/react/outline";
+import FootNoteWrapper from "./FootNoteWrapper";
 
 export default function Layout() {
 
   const  {state: { bookName }} = useContext(AppContext);  
 
   useLifecycleLog(Layout);
-  const [footNote, setFootNote] = useState();
+  const [footNote, setFootNote] = useState(false);
+  const [footNoteSeq,setFootNoteSeq] = useState();
+console.log("FOOTNOTE WRAPER",footNoteSeq);
+useEffect(()=>{
+  if(footNoteSeq ){
+    setFootNote(true);
+  }
+},[footNoteSeq])
 
   const {
     state: {perfHtml},
@@ -32,7 +40,8 @@ export default function Layout() {
               {/* <button onClick={()=>saveFootnote('text')}>save</button>        */}
             </div>            
           </div>
-          {footNote ? <div contentEditable="true" dangerouslySetInnerHTML={{__html:footNote.content}}/> : ''}
+          {/* {footNote ? <div contentEditable="true" dangerouslySetInnerHTML={{__html:footNote.content}}/> : ''} */}
+         { footNote? <FootNoteWrapper fNoteSequenceId={footNoteSeq}/>:''}
           
         </div>
         <div className="bg-white border-b-2 border-secondary rounded-md shadow h-editor overflow-hidden">
@@ -116,7 +125,7 @@ export default function Layout() {
             </div>
           </div>
           <div className="border-l-2 border-r-2 border-secondary pb-16 max-w-none overflow-y-auto h-full no-scrollbars">
-            <Editor setFootNotes={content =>setFootNote(content)} />
+            <Editor setFootNotes={content =>setFootNoteSeq(content)} />
           </div>
         </div>
       </div>
