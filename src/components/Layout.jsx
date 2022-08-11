@@ -1,44 +1,42 @@
-import { useEffect, useState , useContext} from "react";
+import { useEffect, useState, useContext } from "react";
 import ApplicationBar from "./ApplicationBar";
 import Editor from "./Editor";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 import Buttons from "./Buttons";
 import { AppContext } from "../hooks/App.context";
 
-
 import { LockClosedIcon, BookmarkIcon } from "@heroicons/react/outline";
 import FootNoteWrapper from "./FootNoteWrapper";
 
 export default function Layout() {
-
-  const  {state: { bookName }} = useContext(AppContext);  
+  const {
+    state: { bookName, footNoteSelected },
+    actions: { setFootNoteSelected },
+  } = useContext(AppContext);
 
   useLifecycleLog(Layout);
-  const [footNote, setFootNote] = useState(false);
-  const [footNoteSeq,setFootNoteSeq] = useState();
-console.log("FOOTNOTE WRAPER",footNoteSeq);
-useEffect(()=>{
-  if(footNoteSeq ){
-    setFootNote(true);
-  }
-},[footNoteSeq])
+  const [footNoteSeqId, setFootNoteSeqId] = useState();
+  useEffect(() => {
+    footNoteSeqId ? setFootNoteSelected(true) : setFootNoteSelected(false);
+  }, [footNoteSeqId]);
 
   return (
     <div className="layout">
       <div className="flex m-3 gap-2">
-      <div className="w-96 border-2 border-secondary rounded-md">
+        <div className="w-96 border-2 border-secondary rounded-md">
           <div className="flex items-center justify-between bg-secondary">
             <div
               aria-label="editor-pane"
               className="h-8 px-4 flex justify-center items-center text-white text-xxs uppercase tracking-wider font-bold leading-3 truncate"
             >
-              Footnotes      
-              {/* <button onClick={()=>saveFootnote('text')}>save</button>        */}
-            </div>            
+              Footnotes
+            </div>
           </div>
-          {/* {footNote ? <div contentEditable="true" dangerouslySetInnerHTML={{__html:footNote.content}}/> : ''} */}
-         { footNote? <FootNoteWrapper fNoteSequenceId={footNoteSeq}/>:''}
-          
+          {footNoteSelected ? (
+            <FootNoteWrapper footNoteSeqId={footNoteSeqId} />
+          ) : (
+            ""
+          )}
         </div>
         <div className="bg-white border-b-2 border-secondary rounded-md shadow h-editor overflow-hidden">
           <div className="flex items-center justify-between bg-secondary">
@@ -121,7 +119,7 @@ useEffect(()=>{
             </div>
           </div>
           <div className="border-l-2 border-r-2 border-secondary pb-16 max-w-none overflow-y-auto h-full no-scrollbars">
-            <Editor setFootNotes={content =>setFootNoteSeq(content)} />
+            <Editor setFootNote={(content) => setFootNoteSeqId(content)} />
           </div>
         </div>
       </div>
