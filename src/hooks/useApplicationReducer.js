@@ -9,6 +9,7 @@ export default function useStateReducer({ ...props }) {
     editable: true,
     preview: false,
     verbose: false,
+    footNoteSelected:false,
     ...props,
   };
 
@@ -45,6 +46,10 @@ export default function useStateReducer({ ...props }) {
     [state.sequenceIds, setSequenceIds]
   );
 
+  const setFootNoteSelected = useCallback((footNoteSelected)=>{
+    setState((prev) => ({ ...prev, footNoteSelected }));
+  },[])
+
   const actions = {
     setSectionable,
     setBlockable,
@@ -53,6 +58,7 @@ export default function useStateReducer({ ...props }) {
     setToggles,
     setSequenceIds,
     addSequenceId,
+    setFootNoteSelected,
   };
 
   return { state, actions };
