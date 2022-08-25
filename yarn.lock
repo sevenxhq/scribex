@@ -2267,17 +2267,20 @@
   dependencies:
     tslib "^2.3.0"
 
-"@xelah/core@^1.0.0-beta.2":
-  version "1.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@xelah/core/-/core-1.0.0-beta.2.tgz#21c754bffe4037f6aa9ab437495b6b3168e7b0a7"
-  integrity sha512-krkdi5nNDUEMCOv6RTvYXG/b1xZiTdLhE1th5DPTwBCwTP941/scZdN0D1UjDMyQ2WXEx2kJglMvWx1cmcvSsA==
+"@xelah/core@^1.0.0-beta.3":
+  version "1.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@xelah/core/-/core-1.0.0-beta.3.tgz#31981db6032c41e937e03767a238d6bf0dc47353"
+  integrity sha512-D/MP/rggmimE9p+VtQOWoOW2HR+Jq1WpLoPSbNtOX0OWMfi15AHxMP9o1ysHcGvsHuz9WfCnbHG/Gxhp0cEKmw==
   dependencies:
+    contenteditable-arrow-navigation "^0.3.0"
     use-deep-compare "^1.1.0"
 
-"@xelah/type-perf-html@file:.yalc/@xelah/type-perf-html":
-  version "1.0.0-beta.8"
+"@xelah/type-perf-html@1.0.0-beta.11":
+  version "1.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/@xelah/type-perf-html/-/type-perf-html-1.0.0-beta.11.tgz#ea999051ecfc9bbd5e7a78347c0f707f099f0eb5"
+  integrity sha512-JG7Zvwr2KkOPKhpeOf6YjzMIfKrUSofRE81ArsnAoXOvNPlm9EYectMosbKi6Vr84DpNkkq9O86GIx8edbx+cQ==
   dependencies:
-    "@xelah/core" "^1.0.0-beta.2"
+    "@xelah/core" "^1.0.0-beta.3"
     lodash.isequal "^4.5.0"
     use-deep-compare "^1.1.0"
 
@@ -3167,6 +3170,11 @@ content-type@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
+
+contenteditable-arrow-navigation@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/contenteditable-arrow-navigation/-/contenteditable-arrow-navigation-0.3.0.tgz#c3b8b93c954c6c10b55cce3a1d93c327e0b19e19"
+  integrity sha512-pyrzpGEPDy6pyKYD5tyiQob1ZGGkieZUeYuFR2KRNjc02NCuy3+AyvV61cr2wsx5/LFaGCBaaM+mboVQdXjVCw==
 
 convert-source-map@^1.4.0, convert-source-map@^1.6.0, convert-source-map@^1.7.0:
   version "1.8.0"
@@ -8775,6 +8783,11 @@ use-deep-compare@1.1.0, use-deep-compare@^1.1.0:
   dependencies:
     dequal "1.0.0"
 
+use-sync-external-store@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
+  integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
+
 utf8-string-bytes@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/utf8-string-bytes/-/utf8-string-bytes-1.0.3.tgz#8923be75a543b1a1bb00e5a12c52c1b0553b65c6"
@@ -9390,3 +9403,10 @@ zen-observable@0.8.15:
   version "0.8.15"
   resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.15.tgz#96415c512d8e3ffd920afd3889604e30b9eaac15"
   integrity sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==
+
+zustand@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.1.1.tgz#5a61cc755a002df5f041840a414ae6e9a99ee22b"
+  integrity sha512-h4F3WMqsZgvvaE0n3lThx4MM81Ls9xebjvrABNzf5+jb3/03YjNTSgZXeyrvXDArMeV9untvWXRw1tY+ntPYbA==
+  dependencies:
+    use-sync-external-store "1.2.0"

@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-export default function useStateReducer({ ...props }) {
+export default function useScribexReducer({ ...props }) {
   const initialState = {
     // title: "STEP Editor",
     sequenceIds: [],
@@ -9,7 +9,7 @@ export default function useStateReducer({ ...props }) {
     editable: true,
     preview: false,
     verbose: false,
-    footNoteSelected:false,
+    graftSequenceId:null,
     ...props,
   };
 
@@ -38,6 +38,10 @@ export default function useStateReducer({ ...props }) {
   const setSequenceIds = useCallback((sequenceIds) => {
     setState((prev) => ({ ...prev, sequenceIds }));
   }, []);
+  
+  const setGraftSequenceId = useCallback((graftSequenceId) => {
+    setState((prev) => ({ ...prev, graftSequenceId }));
+  }, []);
 
   const addSequenceId = useCallback(
     (_sequenceId) => {
@@ -45,10 +49,6 @@ export default function useStateReducer({ ...props }) {
     },
     [state.sequenceIds, setSequenceIds]
   );
-
-  const setFootNoteSelected = useCallback((footNoteSelected)=>{
-    setState((prev) => ({ ...prev, footNoteSelected }));
-  },[])
 
   const actions = {
     setSectionable,
@@ -58,7 +58,7 @@ export default function useStateReducer({ ...props }) {
     setToggles,
     setSequenceIds,
     addSequenceId,
-    setFootNoteSelected,
+    setGraftSequenceId,
   };
 
   return { state, actions };

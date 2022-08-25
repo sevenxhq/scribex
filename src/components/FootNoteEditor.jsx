@@ -6,7 +6,7 @@ import useLifecycleLog from "../hooks/useLifecycleLog";
 
 import { HtmlPerfEditor } from "@xelah/type-perf-html";
 
-export default function Editor() {
+export default function FootNoteEditor() {
   const {
     state: {
       sequenceIds,
@@ -18,28 +18,30 @@ export default function Editor() {
       editable,
       preview,
       verbose,
+      graftSequenceId,
     },
-    actions: { addSequenceId, saveHtmlPerf ,setGraftSequenceId },
+    actions: { addSequenceId, saveHtmlPerf, setGraftSequenceId },
   } = useContext(ScribexContext);
   const sequenceId = sequenceIds.at(-1);
-  useLifecycleLog(Editor);
+  useLifecycleLog(FootNoteEditor);
   const style =
     isSaving || isLoading || !sequenceId ? { cursor: "progress" } : {};
 
-    const handlers = {
-      onBlockClick: ({ content: _content, element }) => {
-        const _sequenceId = element.dataset.target;
-        const { tagName } = element;
-        const isInline = tagName === 'SPAN';
-        // if (_sequenceId && !isInline) addSequenceId(_sequenceId);
-        if (_sequenceId) setGraftSequenceId(_sequenceId);
-      },
-    };
+  const handlers = {
+    onBlockClick: ({ content: _content, element }) => {
+      const _sequenceId = element.dataset.target;
+      const { tagName } = element;
+      const isInline = tagName === "SPAN";
+      // if (_sequenceId && !isInline) addSequenceId(_sequenceId);
+      if (_sequenceId) setGraftSequenceId(_sequenceId);
+    },
+  };
 
   const props = {
     htmlPerf: htmlPerf,
     onHtmlPerf: saveHtmlPerf,
     sequenceIds,
+    sequenceId,
     addSequenceId,
     options: {
       sectionable,
@@ -51,11 +53,20 @@ export default function Editor() {
     verbose,
     handlers,
   };
+  const graftProps = {
+    ...props,
+    sequenceIds: [graftSequenceId],
+  };
+
+  const graftSequenceEditor = (
+    <>
+      <HtmlPerfEditor key="2" {...graftProps} />
+    </>
+  );
 
   return (
-    <div className='editor' style={style}>
-      {!sequenceId && <p>loading</p>}
-      {sequenceId && <HtmlPerfEditor {...props} />}
+    <div className="editor" style={style}>
+      {graftSequenceId ? graftSequenceEditor : ""}
     </div>
   );
 }

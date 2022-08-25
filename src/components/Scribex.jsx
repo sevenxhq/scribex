@@ -3,27 +3,17 @@ import ApplicationBar from "./ApplicationBar";
 import Editor from "./Editor";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 import Buttons from "./Buttons";
-import { AppContext } from "../hooks/App.context";
+import { ScribexContext } from "../hooks/ScribexContext";
 
 import { LockClosedIcon, BookmarkIcon } from "@heroicons/react/outline";
-import FootNoteWrapper from "./FootNoteWrapper";
+import FootNoteEditor from "./FootNoteEditor";
 
-export default function Layout() {
+export default function Scribex() {
   const {
-    state: { bookName, footNoteSelected },
-    actions: { setFootNoteSelected },
-  } = useContext(AppContext);
+    state: { bookName },
+  } = useContext(ScribexContext);
 
-  useLifecycleLog(Layout);
-  const [footNoteSeqId, setFootNoteSeqId] = useState();
-  useEffect(() => {
-    footNoteSeqId ? setFootNoteSelected(true) : setFootNoteSelected(false);
-  }, [footNoteSeqId]);
-
-  const {
-    state: {perfHtml},
-  } = useContext(AppContext);
-
+  useLifecycleLog(Scribex);
   return (
     <div className="layout">
       <div className="flex m-3 gap-2">
@@ -36,11 +26,7 @@ export default function Layout() {
               Footnotes
             </div>
           </div>
-          {footNoteSelected ? (
-            <FootNoteWrapper footNoteSeqId={footNoteSeqId} />
-          ) : (
-            ""
-          )}
+          <FootNoteEditor />
         </div>
         <div className="bg-white border-b-2 border-secondary rounded-md shadow h-editor overflow-hidden">
           <div className="flex items-center justify-between bg-secondary">
@@ -123,7 +109,7 @@ export default function Layout() {
             </div>
           </div>
           <div className="border-l-2 border-r-2 border-secondary pb-16 max-w-none overflow-y-auto h-full no-scrollbars">
-            <Editor setFootNote={(content) => setFootNoteSeqId(content)} />
+            <Editor />
           </div>
         </div>
       </div>

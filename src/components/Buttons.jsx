@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback, useContext, useMemo, useState } from "react";
 
-import { AppContext } from "../hooks/App.context";
+import { ScribexContext } from "../hooks/ScribexContext";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 
 import {
@@ -51,7 +51,7 @@ export default function Buttons() {
       setEditable,
       setPreview,
     },
-  } = useContext(AppContext);
+  } = useContext(ScribexContext);
 
   return (
     <>

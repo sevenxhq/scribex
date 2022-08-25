@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import { AppContext } from './App.context';
+import { ScribexContext } from './ScribexContext';
 
 export default function useLifecycleLog (component, key='') {
-  const { state: { verbose } } = useContext(AppContext);
+  const { state: { verbose } } = useContext(ScribexContext);
   const name = component.displayName || component.name;
 
   useEffect(() => {
