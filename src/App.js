@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import Layout from "./components/Layout";
-import { AppContextProvider } from "./hooks/App.context";
+import Scribex from "./components/Scribex";
+import { ScribexContextProvider } from "./hooks/ScribexContext";
 
 import "./styles.css";
   
@@ -17,9 +17,9 @@ export default function App() {
 
   return (
     <div className="App">
-      <AppContextProvider verbose={verbose}>
-        <Layout />
-      </AppContextProvider>
+      <ScribexContextProvider verbose={verbose}>
+        <Scribex />
+      </ScribexContextProvider>
     </div>
   );
 }

@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useContext } from "react";
-import { AppContext } from "../hooks/App.context";
+import { ScribexContext } from "../hooks/ScribexContext";
 import useLifecycleLog from "../hooks/useLifecycleLog";
 
 export default function ApplicationBar({ children }) {
   const {
     state: { title },
-  } = useContext(AppContext);
+  } = useContext(ScribexContext);
   useLifecycleLog(ApplicationBar);
 
   return <>{children}</>;

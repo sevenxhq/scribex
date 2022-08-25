@@ -2,7 +2,7 @@ import { useProskomma, useImport, useCatalog } from "proskomma-react-hooks";
 import { useDeepCompareEffect } from "use-deep-compare";
 
 import usePerf from "./usePerf";
-import useApplicationReducer from "./useApplicationReducer";
+import useScribexReducer from "./useScribexReducer";
 import htmlMap from "../data/htmlmap.json";
 
 const _documents = [
@@ -18,8 +18,8 @@ const _documents = [
   },
 ];
 
-export default function useApplicationState(props) {
-  const { state, actions } = useApplicationReducer(props);
+export default function useScribexState() {
+  const { state, actions } = useScribexReducer();
   const { verbose } = state;
 
   const { proskomma, stateId, newStateId } = useProskomma({ verbose });
@@ -30,7 +30,7 @@ export default function useApplicationState(props) {
     documents: _documents,
   });
 
-  const { catalog } = useCatalog({ proskomma, stateId, verbose });
+  const { catalog } = useCatalog({ proskomma, stateId });
 
   const { id: docSetId, documents } = (done && catalog.docSets[0]) || {};
   const { bookCode } = (documents && documents[0]) || {};

@@ -38,15 +38,16 @@ export default function usePerf({
       });
     }
   }, [epiteletePerfHtml, bookCode]);
-  
 
-  const saveHtmlPerf = useDeepCompareCallback( (_htmlPerf,{ sequenceId, sequenceHtml }) => {
+
+  const saveHtmlPerf = useDeepCompareCallback((_htmlPerf, { sequenceId, sequenceHtml }) => {
 
     // _perfHtml.sequencesHtml[sequenceId] = sequenceHtml;
 
     if (!isEqual(htmlPerf, _htmlPerf)) setHtmlPerf(_htmlPerf);
 
     startSaving(async () => {
+    // const startSaving = async () => {
       const newHtmlPerf = await epiteletePerfHtml?.writeHtml(
         bookCode,
         sequenceId,
@@ -57,6 +58,7 @@ export default function usePerf({
 
       if (!isEqual(htmlPerf, newHtmlPerf)) setHtmlPerf(newHtmlPerf);
     });
+    // startSaving();
   },
     [htmlPerf, bookCode]
   );
