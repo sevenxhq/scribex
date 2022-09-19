@@ -1,4 +1,4 @@
-import { useState, useTransition } from "react";
+import { useState, useTransition,useCallback } from "react";
 import {
   useDeepCompareCallback,
   useDeepCompareEffect,
@@ -17,6 +17,7 @@ export default function usePerf({
 }) {
   const [isSaving, startSaving] = useTransition();
   const [htmlPerf, setHtmlPerf] = useState();
+  const [usfmText, setUsfmText] = useState();
 
   const epiteletePerfHtml = useDeepCompareMemo(
     () =>
@@ -42,12 +43,9 @@ export default function usePerf({
 
   const saveHtmlPerf = useDeepCompareCallback((_htmlPerf, { sequenceId, sequenceHtml }) => {
 
-    // _perfHtml.sequencesHtml[sequenceId] = sequenceHtml;
-
     if (!isEqual(htmlPerf, _htmlPerf)) setHtmlPerf(_htmlPerf);
 
     startSaving(async () => {
-    // const startSaving = async () => {
       const newHtmlPerf = await epiteletePerfHtml?.writeHtml(
         bookCode,
         sequenceId,
@@ -58,10 +56,18 @@ export default function usePerf({
 
       if (!isEqual(htmlPerf, newHtmlPerf)) setHtmlPerf(newHtmlPerf);
     });
-    // startSaving();
   },
     [htmlPerf, bookCode]
   );
+
+  const exportUsfm = useCallback((bookCode) => {
+    const write2File = async () => {
+      const usfmString = await epiteletePerfHtml?.readUsfm(bookCode);
+      console.log({ usfmString })
+      setUsfmText(usfmString);
+    }
+    write2File();
+  }, [bookCode])
 
   const undo = async () => {
     const newPerfHtml = await epiteletePerfHtml?.undoHtml(bookCode);
@@ -84,12 +90,14 @@ export default function usePerf({
     canUndo,
     canRedo,
     isSaving,
+    usfmText
   };
 
   const actions = {
     saveHtmlPerf,
     undo,
     redo,
+    exportUsfm
   };
 
   return { state, actions };

@@ -34,7 +34,7 @@ export default function useScribexState() {
 
   const { id: docSetId, documents } = (done && catalog.docSets[0]) || {};
   const { bookCode } = (documents && documents[0]) || {};
-  const {h:bookName} = (documents && documents[0]) || {};
+  const { h: bookName } = (documents && documents[0]) || {};
   const ready = (docSetId && bookCode) || false;
   const isLoading = !done || !ready;
 
@@ -48,7 +48,6 @@ export default function useScribexState() {
     // proskomma, ready, docSetId, bookCode, verbose
   });
   const { htmlPerf } = perfState;
-  
 
   useDeepCompareEffect(() => {
     if (htmlPerf && htmlPerf.mainSequenceId !== state.sequenceIds[0]) {
@@ -57,7 +56,7 @@ export default function useScribexState() {
   }, [htmlPerf, state.sequenceIds]);
 
   return {
-    state: { ...state, ...perfState, isLoading ,bookName},
+    state: { ...state, ...perfState, isLoading, bookName },
     actions: { ...actions, ...perfActions },
   };
 }

@@ -42,7 +42,7 @@ export default function Buttons() {
   };
 
   const {
-    state,
+    state:{bookCode},
     actions: {
       undo,
       redo,
@@ -50,6 +50,7 @@ export default function Buttons() {
       setBlockable,
       setEditable,
       setPreview,
+      exportUsfm
     },
   } = useContext(ScribexContext);
 
@@ -99,6 +100,21 @@ export default function Buttons() {
         aria-hidden="true"
         onClick={() => redo()}
       />
+
+      <button
+        className="text-blue-700 font-semibold text-primary hover:text-white border border-blue-500 hover:border-transparent rounded"
+        onClick={() => exportUsfm(bookCode)}
+      >
+        SAVE
+      </button>
+      {/* <button
+        className="text-blue-700 font-semibold text-primary hover:text-white border border-blue-500 hover:border-transparent rounded"
+        onClick={() =>  window.location.href = '#ch24v1'}
+        // onClick={() =>  document.getElementById("ch24v1").scrollIntoView())}
+      >
+        go to
+      </button> */}
+    
     </>
   );
 }

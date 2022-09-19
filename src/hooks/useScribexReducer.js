@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-export default function useScribexReducer({ ...props }) {
+export default function useScribexReducer() {
   const initialState = {
     // title: "STEP Editor",
     sequenceIds: [],
@@ -9,8 +9,7 @@ export default function useScribexReducer({ ...props }) {
     editable: true,
     preview: false,
     verbose: false,
-    graftSequenceId:null,
-    ...props,
+    graftSequenceId: null,
   };
 
   const [state, setState] = useState(initialState);
@@ -38,7 +37,7 @@ export default function useScribexReducer({ ...props }) {
   const setSequenceIds = useCallback((sequenceIds) => {
     setState((prev) => ({ ...prev, sequenceIds }));
   }, []);
-  
+
   const setGraftSequenceId = useCallback((graftSequenceId) => {
     setState((prev) => ({ ...prev, graftSequenceId }));
   }, []);

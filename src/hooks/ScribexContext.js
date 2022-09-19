@@ -3,11 +3,11 @@ import useScribexState from './useScribexState';
 
 export const ScribexContext = React.createContext();
 
-export function ScribexContextProvider({ children, ...props }) {
+export function ScribexContextProvider({ children }) {
   const {
     state,
     actions,
-  } = useScribexState({...props});
+  } = useScribexState();
 
   const value = {
     state,

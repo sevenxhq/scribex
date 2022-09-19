@@ -58,9 +58,9 @@ export default function FootNoteEditor() {
     sequenceIds: [graftSequenceId],
   };
 
-  const graftSequenceEditor = (
+  const graftSequenceEditor = htmlPerf && (
     <>
-      <HtmlPerfEditor key="2" {...graftProps} />
+      <HtmlPerfEditor {...graftProps} />
     </>
   );
 
