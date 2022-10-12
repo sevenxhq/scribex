@@ -2321,8 +2321,10 @@
     contenteditable-arrow-navigation "^0.3.0"
     use-deep-compare "^1.1.0"
 
-"@xelah/type-perf-html@file:.yalc/@xelah/type-perf-html":
+"@xelah/type-perf-html@1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@xelah/type-perf-html/-/type-perf-html-1.0.0.tgz#7e7ce32052dd74e7a1eaf882e185be3aa34c9958"
+  integrity sha512-bsbVsw7Raj0JbPOH344cxsUhihFrtqVtaTvdMvY7mh8ed+wzlJMys/FfQBjzsapyPi/BX9Lkjgv/QMrvYsZHoQ==
   dependencies:
     "@xelah/core" "^1.0.0"
     lodash.isequal "^4.5.0"

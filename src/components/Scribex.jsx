@@ -1,19 +1,68 @@
-import { useEffect, useState, useContext } from "react";
-import ApplicationBar from "./ApplicationBar";
-import Editor from "./Editor";
-import useLifecycleLog from "../hooks/useLifecycleLog";
+import UsfmEditor from "./UsfmEditor";
 import Buttons from "./Buttons";
-import { ScribexContext } from "../hooks/ScribexContext";
-
 import { LockClosedIcon, BookmarkIcon } from "@heroicons/react/outline";
 import FootNoteEditor from "./FootNoteEditor";
+import { useContext } from "react";
+import { ScribexContext } from "../context/ScribexContext";
+import { useProskomma, useImport, useCatalog } from "proskomma-react-hooks";
+import { useDeepCompareEffect } from "use-deep-compare";
+import htmlMap from "../data/htmlmap.json";
+import usePerf from "../hooks/usePerf";
 
 export default function Scribex() {
-  const {
-    state: { bookName },
-  } = useContext(ScribexContext);
+  const { state, actions } = useContext(ScribexContext);
+  const _documents = [
+    // {
+    //   selectors: { org: 'bcs', lang: 'hi', abbr: 'irv' },
+    //   bookCode: 'tit',
+    //   url: '/bcs-hi_irv.tit.usfm',
+    // },
+    {
+      selectors: { org: "unfoldingWord", lang: "en", abbr: "ult" },
+      bookCode: "psa",
+      url: "/unfoldingWord-en_ult.psa-short.usfm",
+    },
+  ];
 
-  useLifecycleLog(Scribex);
+  const { verbose } = state;
+  const { proskomma, stateId, newStateId } = useProskomma({ verbose });
+  const { done } = useImport({
+    proskomma,
+    stateId,
+    newStateId,
+    documents: _documents,
+  });
+
+  const { catalog } = useCatalog({ proskomma, stateId });
+
+  const { id: docSetId, documents } = (done && catalog.docSets[0]) || {};
+  const { bookCode } = (documents && documents[0]) || {};
+  const { h: bookName } = (documents && documents[0]) || {};
+  const ready = (docSetId && bookCode) || false;
+  const isLoading = !done || !ready;
+
+  const { state: perfState, actions: perfActions } = usePerf({
+    proskomma,
+    ready,
+    docSetId,
+    bookCode,
+    verbose,
+    htmlMap,
+  });
+  const { htmlPerf } = perfState;
+
+  useDeepCompareEffect(() => {
+    if (htmlPerf && htmlPerf.mainSequenceId !== state.sequenceIds[0]) {
+      actions.setSequenceIds([htmlPerf?.mainSequenceId]);
+    }
+  }, [htmlPerf, state.sequenceIds]);
+  const _props = {
+    ...state,
+    ...perfState,
+    ...actions,
+    ...perfActions,
+  };
+
   return (
     <div className="layout">
       <div className="flex m-3 gap-2">
@@ -26,14 +75,14 @@ export default function Scribex() {
               Footnotes
             </div>
           </div>
-          <FootNoteEditor />
+          <FootNoteEditor {..._props} />
         </div>
         <div className="bg-white border-b-2 border-secondary rounded-md shadow h-editor overflow-hidden">
           <div className="flex items-center justify-between bg-secondary">
             <div className="flex">
               <div className="bg-primary text-white py-2 uppercase tracking-wider text-xs font-semibold">
                 <span aria-label="editor-bookname" className="px-3">
-                  {bookName}
+                  Psalms
                 </span>
                 <span
                   className="focus:outline-none bg-white py-4 bg-opacity-10"
@@ -83,9 +132,7 @@ export default function Scribex() {
               Editor
             </div>
             <div className="flex items-center">
-              <ApplicationBar>
-                <Buttons />
-              </ApplicationBar>
+              <Buttons />
             </div>
             <div title="navigation lock/unlock" className="flex items-center">
               <div>
@@ -109,7 +156,7 @@ export default function Scribex() {
             </div>
           </div>
           <div className="border-l-2 border-r-2 border-secondary pb-16 max-w-none overflow-y-auto h-full no-scrollbars">
-            <Editor />
+            <UsfmEditor {..._props} />
           </div>
         </div>
       </div>

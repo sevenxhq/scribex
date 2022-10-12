@@ -1,29 +1,27 @@
 import { useCallback, useContext } from "react";
 // import { Skeleton, Stack } from "@mui/material";
 
-import { ScribexContext } from "../hooks/ScribexContext";
-import useLifecycleLog from "../hooks/useLifecycleLog";
+import { ScribexContext } from "../context/ScribexContext";
 
 import { HtmlPerfEditor } from "@xelah/type-perf-html";
 
-export default function FootNoteEditor() {
+export default function FootNoteEditor(props) {
   const {
-    state: {
-      sequenceIds,
-      isSaving,
-      isLoading,
-      htmlPerf,
-      sectionable,
-      blockable,
-      editable,
-      preview,
-      verbose,
-      graftSequenceId,
-    },
-    actions: { addSequenceId, saveHtmlPerf, setGraftSequenceId },
-  } = useContext(ScribexContext);
+    sequenceIds,
+    isSaving,
+    isLoading,
+    htmlPerf,
+    sectionable,
+    blockable,
+    editable,
+    preview,
+    verbose,
+    graftSequenceId,
+    addSequenceId,
+    saveHtmlPerf,
+    setGraftSequenceId,
+  } = props;
   const sequenceId = sequenceIds.at(-1);
-  useLifecycleLog(FootNoteEditor);
   const style =
     isSaving || isLoading || !sequenceId ? { cursor: "progress" } : {};
 
@@ -37,7 +35,7 @@ export default function FootNoteEditor() {
     },
   };
 
-  const props = {
+  const _props = {
     htmlPerf: htmlPerf,
     onHtmlPerf: saveHtmlPerf,
     sequenceIds,
@@ -54,7 +52,7 @@ export default function FootNoteEditor() {
     handlers,
   };
   const graftProps = {
-    ...props,
+    ..._props,
     sequenceIds: [graftSequenceId],
   };
 

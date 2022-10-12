@@ -1,28 +1,22 @@
-import { useCallback, useContext } from "react";
-// import { Skeleton, Stack } from "@mui/material";
-
-import { ScribexContext } from "../hooks/ScribexContext";
-import useLifecycleLog from "../hooks/useLifecycleLog";
-
 import { HtmlPerfEditor } from "@xelah/type-perf-html";
 
-export default function Editor() {
+export default function UsfmEditor(props) {
+  console.log("editopr", props);
   const {
-    state: {
-      sequenceIds,
-      isSaving,
-      isLoading,
-      htmlPerf,
-      sectionable,
-      blockable,
-      editable,
-      preview,
-      verbose,
-    },
-    actions: { addSequenceId, saveHtmlPerf, setGraftSequenceId },
-  } = useContext(ScribexContext);
+    sequenceIds,
+    isSaving,
+    isLoading,
+    htmlPerf,
+    sectionable,
+    blockable,
+    editable,
+    preview,
+    verbose,
+    addSequenceId,
+    saveHtmlPerf,
+    setGraftSequenceId,
+  } = props;
   const sequenceId = sequenceIds.at(-1);
-  useLifecycleLog(Editor);
   const style =
     isSaving || isLoading || !sequenceId ? { cursor: "progress" } : {};
 
@@ -38,7 +32,7 @@ export default function Editor() {
   };
   let chapterIndex = 3;
 
-  const props = {
+  const _props = {
     htmlPerf: htmlPerf,
     onHtmlPerf: saveHtmlPerf,
     sequenceIds,
@@ -58,7 +52,7 @@ export default function Editor() {
   return (
     <div className="editor" style={style}>
       {!sequenceId && <p>loading</p>}
-      {sequenceId && <HtmlPerfEditor {...props} />}
+      {sequenceId && <HtmlPerfEditor {..._props} />}
     </div>
   );
 }

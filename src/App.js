@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import Scribex from "./components/Scribex";
-import { ScribexContextProvider } from "./hooks/ScribexContext";
+import { ScribexContextProvider } from "./context/ScribexContext";
 
 import "./styles.css";
 

@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback, useContext, useMemo, useState } from "react";
 
-import { ScribexContext } from "../hooks/ScribexContext";
-import useLifecycleLog from "../hooks/useLifecycleLog";
+import { ScribexContext } from "../context/ScribexContext";
 
 import {
   LockClosedIcon,
@@ -17,8 +16,6 @@ import { ArrowClockwise, ArrowCounterClockwise } from "phosphor-react";
 export const classNames = (...classes) => classes.filter(Boolean).join(" ");
 
 export default function Buttons() {
-  useLifecycleLog(Buttons);
-
   const [sectionable, setSectionableState] = useState(false);
   const [blockable, setBlockableState] = useState(true);
   const [editable, setEditableState] = useState(true);
@@ -42,7 +39,7 @@ export default function Buttons() {
   };
 
   const {
-    state:{bookCode},
+    state: { bookCode },
     actions: {
       undo,
       redo,
@@ -50,7 +47,7 @@ export default function Buttons() {
       setBlockable,
       setEditable,
       setPreview,
-      exportUsfm
+      exportUsfm,
     },
   } = useContext(ScribexContext);
 
@@ -100,21 +97,6 @@ export default function Buttons() {
         aria-hidden="true"
         onClick={() => redo()}
       />
-
-      <button
-        className="text-blue-700 font-semibold text-primary hover:text-white border border-blue-500 hover:border-transparent rounded"
-        onClick={() => exportUsfm(bookCode)}
-      >
-        SAVE
-      </button>
-      {/* <button
-        className="text-blue-700 font-semibold text-primary hover:text-white border border-blue-500 hover:border-transparent rounded"
-        onClick={() =>  window.location.href = '#ch24v1'}
-        // onClick={() =>  document.getElementById("ch24v1").scrollIntoView())}
-      >
-        go to
-      </button> */}
-    
     </>
   );
 }
