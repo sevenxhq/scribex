@@ -3851,23 +3851,24 @@ entities@^2.0.0:
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.2.0.tgz#098dc90ebb83d8dffa089d55256b351d34c4da55"
   integrity sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
 
-epitelete-perf-html@^0.2.4:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/epitelete-perf-html/-/epitelete-perf-html-0.2.5.tgz#a8f8e41f035289817f22a5afb2f8dd7017f5555f"
-  integrity sha512-W+/6LIzQfPqp78LltkFPFFFUjm0rU8OXK+2cUlz25JrVQNt6L8VrgAw7sY14oBfAvcN1V19zP6CWzVFK6W+VEg==
+epitelete-html@^0.2.9:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/epitelete-html/-/epitelete-html-0.2.9.tgz#8153a721ec34f254f0909dccb715549fefbc6822"
+  integrity sha512-TqZh+7K8ik2nrH+JZYHShto1su4mMmipjElHuaXXnP3bai1yHMRmjGRZjAOxVFq5JTGTByncDAkKguiRoIUsdg==
   dependencies:
     "@babel/core" "^7.17.10"
-    epitelete "^0.2.5"
+    epitelete "^0.2.9"
     node-html-parser "^5.3.3"
 
-epitelete@^0.2.5:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/epitelete/-/epitelete-0.2.6.tgz#289b9c86cf96f28aa0155cf526c3169910f6b091"
-  integrity sha512-qZ58mQ7juzeJ52PUTXqfOADu8o64xgrUP0d+Pdk8L6pKEzoEXaoEh51Vs6e9S463rbM25SMI781U1T7Tvsy2mQ==
+epitelete@^0.2.9:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/epitelete/-/epitelete-0.2.9.tgz#18865a73a0a4733f1a523684ba1d88deb70382c2"
+  integrity sha512-KX+vuYGBa4m+WjzBbXDfMOR1GAqvHs7k6S+HF0y9e4zFMrTPG0eN40MRPl6p+k04or3Bcd2BzrXzTp+urdC2YA==
   dependencies:
-    "@babel/core" "^7.17.10"
+    "@babel/core" "^7.19.0"
     lodash "4.17.21"
-    proskomma-json-tools "^0.4.2"
+    pipeline-handler "^1.1.0"
+    proskomma-json-tools "^0.5.7"
 
 error-ex@^1.3.1:
   version "1.3.2"
@@ -6696,6 +6697,11 @@ pify@^2.3.0:
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
   integrity sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==
 
+pipeline-handler@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/pipeline-handler/-/pipeline-handler-1.1.1.tgz#35ef949dfffbdf205996b13ad695207e2e8a6986"
+  integrity sha512-G6sbfxznzXAvcRgs/vWPj3EEjBsgmFAtgabVzGYqpTXT9b3i3+phJxtslrlvDpZHTCtgqhl5tVqStzqyfUu8/g==
+
 pirates@^4.0.4:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.5.tgz#feec352ea5c3268fb23a37c702ab1699f35a5f3b"
@@ -7348,20 +7354,20 @@ prop-types@15.8.1, prop-types@^15.7.2, prop-types@^15.8.1:
     object-assign "^4.1.1"
     react-is "^16.13.1"
 
-proskomma-json-tools@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/proskomma-json-tools/-/proskomma-json-tools-0.4.2.tgz#4f2f54144bfb45dba7b3092f56efc15a6f6b71c8"
-  integrity sha512-xaA8gq9EcCVUB8YMCGsWkWOjrP9dWW77cMXc0dH0M2TdfjgGXq6x++Kv5WH3PdXzj0T/gxn0TCf38sFRosC/wQ==
+proskomma-json-tools@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/proskomma-json-tools/-/proskomma-json-tools-0.5.6.tgz#4d30911a60861ca3588107e7734933a19b74af90"
+  integrity sha512-IZVH2kkYJDKQMmH6e2vxE6JciLn5+vFqSyL9HuRFza6/JZhVoBRC41Rlv03NwbjnZj9h3JqZ4hhDd8ir/hmtYg==
   dependencies:
     "@babel/core" "^7.17.10"
     "@babel/plugin-proposal-throw-expressions" "^7.18.6"
     ajv "^8.11.0"
     deep-equal "^2.0.5"
 
-proskomma-json-tools@^0.5.6:
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/proskomma-json-tools/-/proskomma-json-tools-0.5.6.tgz#4d30911a60861ca3588107e7734933a19b74af90"
-  integrity sha512-IZVH2kkYJDKQMmH6e2vxE6JciLn5+vFqSyL9HuRFza6/JZhVoBRC41Rlv03NwbjnZj9h3JqZ4hhDd8ir/hmtYg==
+proskomma-json-tools@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/proskomma-json-tools/-/proskomma-json-tools-0.5.7.tgz#77ea228bfa68c03e0ccd5cd94d491e8b08e8dc35"
+  integrity sha512-u23RCVWKaK1/ryuT6hAnAdTYiIjMC7shkUTcKhsmdqrY2T9E2EF7Cyrpgw3pBExPEHmNuzG3Xja40h6ztxJiFw==
   dependencies:
     "@babel/core" "^7.17.10"
     "@babel/plugin-proposal-throw-expressions" "^7.18.6"
