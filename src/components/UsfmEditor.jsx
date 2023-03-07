@@ -1,7 +1,9 @@
 import { HtmlPerfEditor } from "@xelah/type-perf-html";
 
+import RecursiveBlock from './RecursiveBlock';
+
+
 export default function UsfmEditor(props) {
-  console.log("editopr", props);
   const {
     sequenceIds,
     isSaving,
@@ -31,13 +33,19 @@ export default function UsfmEditor(props) {
     },
   };
   let chapterIndex = 3;
-
+  function onReferenceSelected({ bookId, chapter, verse }) {
+    console.log({ bookId, chapter, verse })
+  }
+  
   const _props = {
     htmlPerf: htmlPerf,
     onHtmlPerf: saveHtmlPerf,
     sequenceIds,
     addSequenceId,
     chapterIndex,
+    components: {
+      block: (__props) => RecursiveBlock({ htmlPerf, onHtmlPerf: saveHtmlPerf, sequenceIds, addSequenceId, onReferenceSelected, ...__props }),
+    },
     options: {
       sectionable,
       blockable,
@@ -48,6 +56,20 @@ export default function UsfmEditor(props) {
     verbose,
     handlers,
   };
+
+  // const onIntersection = (entries) => {
+  //   for (const entry of entries) {
+  //     if (entry.isIntersecting) {
+  //       console.log(entry.target.dataset.attsNumber);
+  //     }
+  //   }
+  // };
+  // const chapters = document.querySelectorAll('.chapter');
+  // const observer = new IntersectionObserver(onIntersection);
+  // chapters.forEach(chapter=>{
+  //   observer.observe(chapter);
+  // })
+ 
 
   return (
     <div className="editor" style={style}>

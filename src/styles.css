@@ -47,6 +47,17 @@ p.paragraph {
   content: " ‡";
 }
 
+span.verse:after {
+  content: ' ';
+}
+span.verse{
+  display: none;
+}
+a.verse:after {
+  content: ' ';
+}
+
+
 /* html {
   background-color: lightgray;
 }

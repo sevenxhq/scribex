@@ -6,26 +6,29 @@ import { useContext } from "react";
 import { ScribexContext } from "../context/ScribexContext";
 import { useProskomma, useImport, useCatalog } from "proskomma-react-hooks";
 import { useDeepCompareEffect } from "use-deep-compare";
-import htmlMap from "../data/htmlmap.json";
+import htmlMap from "../data/htmlmap.js";
 import usePerf from "../hooks/usePerf";
+// import { readFile } from "../hooks/readFile";
+import usfmData from "../data/titus.json"
+import { usfm2perf } from "../hooks/useUsmf2Perf"
 
 export default function Scribex() {
   const { state, actions } = useContext(ScribexContext);
   const _documents = [
-    // {
-    //   selectors: { org: 'bcs', lang: 'hi', abbr: 'irv' },
-    //   bookCode: 'tit',
-    //   url: '/bcs-hi_irv.tit.usfm',
-    // },
     {
-      selectors: { org: "unfoldingWord", lang: "en", abbr: "ult" },
-      bookCode: "psa",
-      url: "/unfoldingWord-en_ult.psa-short.usfm",
+      selectors: { org: 'bcs', lang: 'hi', abbr: 'irv' },
+      bookCode: 'tit',
+      url: '/bcs-hi_irv.tit.usfm',
     },
+    // {
+    //   selectors: { org: "unfoldingWord", lang: "en", abbr: "ult" },
+    //   bookCode: "psa",
+    //   url: "/unfoldingWord-en_ult.psa-short.usfm",
+    // },
   ];
 
   const { verbose } = state;
-  const { proskomma, stateId, newStateId } = useProskomma({ verbose });
+  const { proskomma, stateId, newStateId } = useProskomma({ verbose  });
   const { done } = useImport({
     proskomma,
     stateId,
@@ -34,7 +37,9 @@ export default function Scribex() {
   });
 
   const { catalog } = useCatalog({ proskomma, stateId });
-
+  
+  // const perfJson = usfm2perf(usfmData.data)
+  // console.log({ perfJson })
   const { id: docSetId, documents } = (done && catalog.docSets[0]) || {};
   const { bookCode } = (documents && documents[0]) || {};
   const { h: bookName } = (documents && documents[0]) || {};
@@ -62,7 +67,6 @@ export default function Scribex() {
     ...actions,
     ...perfActions,
   };
-
   return (
     <div className="layout">
       <div className="flex m-3 gap-2">

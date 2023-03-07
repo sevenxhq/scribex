@@ -33,9 +33,10 @@ const htmlMap= (context) =>{
         tagName: 'span'
       }) },
       "verses": ({ atts }) => ({
-        classList: ['mark', 'verse', `verse-${atts.number}`],
+        classList: ['mark', 'verses', `verse-${atts.number}`],
         id: `ch${context.lastChapter}v${atts.number}`,
-        tagName: "a"
+        tagName: "span",
+        contentEditable: "false"
       })
     },
     "graft":{

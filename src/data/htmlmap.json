@@ -38,7 +38,7 @@
       "tagName": "sub"
     },
     "verses": {
-      "tagName": "sup"
+      "tagName": "a"
     }
   }
 }
